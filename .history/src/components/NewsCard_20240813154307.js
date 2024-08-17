@@ -1,0 +1,24 @@
+import React from 'react'
+import { Text } from '@chakra-ui/react'
+
+const NewsCard = ({ content, semantic }) => {
+  return (
+    <div name="card-container" className='w-[300px] h-[290px] p-3 bg-slate-50 rounded-2xl'>
+      <img src='/image/new_img.png' alt='News Image'  className='object-cover w-full h-[150px] rounded-xl'/>
+      <div name="text-box" className='flex flex-col items-center'>
+        <Text fontSize='lg' className='grow py-1' as={'b'}>
+          ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ
+          {/* { title } */}
+        </Text>
+        <Text fontSize={'sm'} lineHeight={1} className='h-[42px] bg-slate-400 grow text-center text-slate-600'>
+          { content }
+        </Text>
+        <Text fontSize={'xl'} as={'b'} className='grow'>
+          { semantic }
+        </Text>
+      </div>
+    </div>
+  )
+}
+
+export default NewsCard

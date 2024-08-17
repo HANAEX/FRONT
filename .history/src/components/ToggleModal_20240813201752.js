@@ -1,0 +1,30 @@
+import React from 'react';
+import { Button, ButtonGroup, Box } from '@chakra-ui/react';
+
+const ToggleSwitch = ({ selected, handleToggle, direction }) => {
+
+  return (
+    <Box display="flex" justifyContent={direction} alignItems="center" mt={4}>
+      <ButtonGroup borderRadius="md" size="lg" spacing={0} className='bg-slate-200'>
+        <Button
+          onClick={handleToggle}
+          colorScheme={selected ? 'red' : 'gray'}
+          borderRadius="full"
+          width="100px"
+        >
+          살래요
+        </Button>
+        <Button
+          onClick={handleToggle}
+          colorScheme={!selected ? 'red' : 'gray'}
+          borderRadius="full"
+          width="100px"
+        >
+          팔래요
+        </Button>
+      </ButtonGroup>
+    </Box>
+  );
+};
+
+export default ToggleSwitch;
