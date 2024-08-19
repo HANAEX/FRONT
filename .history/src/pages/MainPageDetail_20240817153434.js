@@ -1,0 +1,409 @@
+// import React, { useState, useEffect } from "react";
+// import MainChart from "../components/MainChart";
+// import {
+//   Text,
+//   Stat,
+//   StatLabel,
+//   StatNumber,
+//   StatHelpText,
+//   StatArrow,
+//   Button,
+//   Modal,
+//   ModalOverlay,
+//   ModalContent,
+//   ModalFooter,
+//   ModalCloseButton,
+//   useDisclosure,
+//   Image,
+//   Divider
+// } from "@chakra-ui/react";
+// import ExChangeInput from "../components/ExChangeInput";
+// import ToggleModal from "../components/ToggleModal";
+// import MainRecommandButton from '../components/MainRecommandButton';
+// import StockBox from '../components/StockBox';
+// import Account from '../components/Account';
+// import WonInput from '../components/WonInput';
+
+// const MainPageDetail = () => {
+//   // Modal variables
+//   const { isOpen, onOpen, onClose } = useDisclosure();
+//   const [selected, setSelected] = useState(true);
+//   const [isFixed, setIsFixed] = useState(false);
+
+//   // WonInput variables
+//   const format = (val) => `$` + val
+//   const parse = (val) => val.replace(/^\$/, '')
+
+//   const [wonValue, setWonValue] = useState('1358.3')
+  
+//   // toggle handler
+//   const handleToggle = () => {
+//     setSelected(!selected);
+//   };
+
+//   // 스크롤 이동 함수
+//   const scrollToSection = (sectionName) => {
+//     const section = document.querySelector(`div[name="${sectionName}"]`);
+//     if (section) {
+//       section.scrollIntoView({ behavior: "smooth" });
+//     }
+//   };
+
+//   // 스크롤 이벤트를 감지하여 left-section 고정
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       const recommandSection = document.querySelector(`div[name="recommand-section"]`);
+//       const sectionTop = recommandSection.getBoundingClientRect().top;
+
+//       if (sectionTop <= 0) {
+//         setIsFixed(true);
+//       } else {
+//         setIsFixed(false);
+//       }
+//     };
+
+//     window.addEventListener("scroll", handleScroll);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   return (
+//     <div className="w-[960px] bg-slate-500 flex flex-col py-1 px-10">
+//       {/* 살때 팔 때 */}
+//       <div className="w-full flex justify-center px-48 py-2 rounded-lg my-2 bg-slate-100">
+//         <Stat className="flex justify-center">
+//           <StatLabel>내가 살떄</StatLabel>
+//           <StatNumber>345,670</StatNumber>
+//           <StatHelpText>
+//             <StatArrow type="increase" />
+//             23.36%
+//           </StatHelpText>
+//         </Stat>
+
+//         <Stat className="flex justify-center">
+//           <StatLabel>내가 팔때</StatLabel>
+//           <StatNumber>45</StatNumber>
+//           <StatHelpText>
+//             <StatArrow type="decrease" />
+//             9.05%
+//           </StatHelpText>
+//         </Stat>
+//       </div>
+//       <div className="flex flex-col items-center bg-slate-100 rounded-lg py-5">
+//         {/* 메인 차트 */}
+//         <MainChart />
+//         {/* 최고가 최저가 */}
+//         <div className="flex gap-3 py-1">
+//           <div className="flex items-center gap-2">
+//             <div className="w-4 h-4 bg-slate-500 rounded-full"></div>
+//             <Text>최저가-최고가</Text>
+//           </div>
+//           <div className="flex items-center gap-2">
+//             <div className="w-4 h-4 bg-slate-500 rounded-full"></div>
+//             <Text>최저가-최고가</Text>
+//           </div>
+//         </div>
+//       </div>
+//       {/* 구매 버튼 판매 버튼 */}
+//       <div className="flex justify-center py-2 bg-slate-100 gap-6 my-2 rounded-lg">
+//         <Button
+//           onClick={onOpen}
+//           colorScheme="teal"
+//           variant="outline"
+//           height="42px"
+//           width="200px"
+//         >
+//           살래요
+//         </Button>
+//         <Button
+//           colorScheme="teal"
+//           variant="outline"
+//           height="42px"
+//           width="200px"
+//         >
+//           조회/변경
+//         </Button>
+//       </div>
+//       <div
+//         name="recommand-section"
+//         className="px-3 py-5 flex bg-slate-300 mt-1 gap-5"
+//         style={{ overflow: "visible" }}
+//       > 
+//         {isFixed && (<div name="fake-section" className='bg-slate-50 px-5 py-5 flex-none w-56'></div>)}
+//         <div
+//           name="left-section"
+//           className={`bg-slate-50 px-5 py-5 flex-none w-56 ${isFixed ? "fixed top-0 z-10" : ""}`}
+//           style={{ top: isFixed ? "10px" : "auto" }}
+//         >
+//           <div className='flex items-center mb-1'>
+//             <Text className='text-2xl'>USD/KRW</Text>
+//             <Image boxSize={'42px'} src="/image/america_flag.png"></Image>
+//           </div>
+
+//           <MainRecommandButton text={"투자포인트"} scrollToSection={() => scrollToSection("1-1")} />
+//           <MainRecommandButton text={"추천주식"} scrollToSection={() => scrollToSection("1-2")} />
+//           <MainRecommandButton text={"추천상품"} scrollToSection={() => scrollToSection("1-3")} />
+//         </div>
+//         <div name="right-section" className="bg-slate-50 p-5 flex-1">
+//           <div name="1-1" className="bg-slate-400 h-80 mt-6"></div>
+//           <div name="1-2" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+//             <Text className='text-xl font-semibold leading-0'>주식추전 TOP 3</Text>
+//             <Divider className='my-3' orientation='horizontal'/>
+//             <div className='flex justify-around'>
+//               <StockBox />
+//               <StockBox />
+//               <StockBox />
+//             </div>
+//           </div>
+//           <div name="1-3" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+//             <Text className='text-xl font-semibold leading-0'>상품추천</Text>
+//             <Divider className='my-3' orientation='horizontal'/>
+//               <Account />
+//               <Account />
+//               <Account />
+//           </div>
+//           <div name="1-4" className="bg-slate-400 h-80 mt-6 px-6 py-3"></div>
+//         </div>
+//       </div>
+
+//       {/* 모달 */}
+//       <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
+//         <ModalOverlay />
+//         <ModalContent className='px-6'>
+//           <Text className='py-4 font-semibold text-lg'>거래하기</Text>
+//           <div className="w-full flex justify-start">
+//             <ToggleModal
+//               selected={selected}
+//               handleToggle={handleToggle}
+//               direction={"center"}
+//             />
+//           </div>
+//           {/* 환율 고르기 */}
+//           <div className='flex justify-between items-center pt-3'>
+//             <Text className='text-xl leading-0 text-slate-600'>구매환율</Text>
+//             <Text className='px-2 py-1 rounded-sm bg-slate-400'>바로구매</Text>
+//           </div>
+//           {/* 원 input */}
+//           <WonInput
+//             format={format}
+//             parse={parse}
+//             wonValue={wonValue}
+//             setWonValue={setWonValue}
+//           />
+//           <Text>즉시거래할 현재 환율을 선택했어요</Text>
+
+//           {/* 원하는 금액 input */}
+//           <Text>원하는 금액</Text>
+//           <ExChangeInput />
+
+//           {/* 환산금액 */}
+//           <Text>환산금액</Text>
+//           <Text name="cal-ex"></Text>
+//           <ModalCloseButton />  
+//           <div>
+//             <ModalFooter>
+//               <Button colorScheme="blue" mr={3} onClick={onClose}>
+//                 Close
+//               </Button>
+//               <Button variant="ghost">Secondary Action</Button>
+//             </ModalFooter>
+//           </div>
+//         </ModalContent>
+//       </Modal>
+//     </div>
+//   );
+// };
+
+// export default MainPageDetail;
+
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
+  StatArrow,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalFooter,
+  ModalCloseButton,
+  useDisclosure,
+  Image,
+  Divider
+} from "@chakra-ui/react";
+import ExChangeInput from "../components/ExChangeInput";
+import ToggleModal from "../components/ToggleModal";
+import MainRecommandButton from '../components/MainRecommandButton';
+import StockBox from '../components/StockBox';
+import Account from '../components/Account';
+import WonInput from '../components/WonInput';
+import MainChart from "../components/MainChart";
+
+const MainPageDetail = () => {
+  // Modal 관련 변수
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selected, setSelected] = useState(true);
+  const [isFixed, setIsFixed] = useState(false);
+
+  // WonInput 관련 변수
+  const format = (val) => `$` + val;
+  const parse = (val) => val.replace(/^\$/, '');
+  const [wonValue, setWonValue] = useState('1358.3');
+  const [exchangeValue, setExchangeValue] = useState(0); // ExChangeInput 값을 저장할 상태
+  const [calculatedValue, setCalculatedValue] = useState(0); // 계산 결과를 저장할 상태
+
+  // 토글 핸들러
+  const handleToggle = () => {
+    setSelected(!selected);
+  };
+
+  // wonValue 또는 exchangeValue가 변경될 때 계산 수행
+  useEffect(() => {
+    const result = parseFloat(exchangeValue) * parseFloat(wonValue);
+    setCalculatedValue(result.toFixed(2)); // 소수점 2자리까지 결과 표시
+  }, [exchangeValue, wonValue]);
+
+  // 스크롤과 고정 로직
+  const scrollToSection = (sectionName) => {
+    const section = document.querySelector(`div[name="${sectionName}"]`);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const recommandSection = document.querySelector(`div[name="recommand-section"]`);
+      const sectionTop = recommandSection.getBoundingClientRect().top;
+
+      setIsFixed(sectionTop <= 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return (
+    <div className="w-[960px] bg-slate-500 flex flex-col py-1 px-10">
+      {/* 살 때 팔 때 */}
+      <div className="w-full flex justify-center px-48 py-2 rounded-lg my-2 bg-slate-100">
+        <Stat className="flex justify-center">
+          <StatLabel>내가 살 때</StatLabel>
+          <StatNumber>345,670</StatNumber>
+          <StatHelpText>
+            <StatArrow type="increase" />
+            23.36%
+          </StatHelpText>
+        </Stat>
+
+        <Stat className="flex justify-center">
+          <StatLabel>내가 팔 때</StatLabel>
+          <StatNumber>45</StatNumber>
+          <StatHelpText>
+            <StatArrow type="decrease" />
+            9.05%
+          </StatHelpText>
+        </Stat>
+      </div>
+      <div className="flex flex-col items-center bg-slate-100 rounded-lg py-5">
+        {/* 메인 차트 */}
+        <MainChart />
+        {/* 최고가 최저가 */}
+        <div className="flex gap-3 py-1">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-slate-500 rounded-full"></div>
+            <Text>최저가-최고가</Text>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-slate-500 rounded-full"></div>
+            <Text>최저가-최고가</Text>
+          </div>
+        </div>
+      </div>
+      {/* 구매 버튼 판매 버튼 */}
+      <div className="flex justify-center py-2 bg-slate-100 gap-6 my-2 rounded-lg">
+        <Button onClick={onOpen} colorScheme="teal" variant="outline" height="42px" width="200px">
+          살래요
+        </Button>
+        <Button colorScheme="teal" variant="outline" height="42px" width="200px">
+          조회/변경
+        </Button>
+      </div>
+      <div name="recommand-section" className="px-3 py-5 flex bg-slate-300 mt-1 gap-5" style={{ overflow: "visible" }}>
+        {isFixed && (<div name="fake-section" className='bg-slate-50 px-5 py-5 flex-none w-56'></div>)}
+        <div name="left-section" className={`bg-slate-50 px-5 py-5 flex-none w-56 ${isFixed ? "fixed top-0 z-10" : ""}`} style={{ top: isFixed ? "10px" : "auto" }}>
+          <div className='flex items-center mb-1'>
+            <Text className='text-2xl'>USD/KRW</Text>
+            <Image boxSize={'42px'} src="/image/america_flag.png"></Image>
+          </div>
+
+          <MainRecommandButton text={"투자포인트"} scrollToSection={() => scrollToSection("1-1")} />
+          <MainRecommandButton text={"추천주식"} scrollToSection={() => scrollToSection("1-2")} />
+          <MainRecommandButton text={"추천상품"} scrollToSection={() => scrollToSection("1-3")} />
+        </div>
+        <div name="right-section" className="bg-slate-50 p-5 flex-1">
+          <div name="1-1" className="bg-slate-400 h-80 mt-6"></div>
+          <div name="1-2" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+            <Text className='text-xl font-semibold leading-0'>주식추전 TOP 3</Text>
+            <Divider className='my-3' orientation='horizontal'/>
+            <div className='flex justify-around'>
+              <StockBox />
+              <StockBox />
+              <StockBox />
+            </div>
+          </div>
+          <div name="1-3" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+            <Text className='text-xl font-semibold leading-0'>상품추천</Text>
+            <Divider className='my-3' orientation='horizontal'/>
+              <Account />
+              <Account />
+              <Account />
+          </div>
+          <div name="1-4" className="bg-slate-400 h-80 mt-6 px-6 py-3"></div>
+        </div>
+      </div>
+
+      {/* 모달 */}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
+        <ModalOverlay />
+        <ModalContent className='px-6'>
+          <Text className='py-4 font-semibold text-lg'>거래하기</Text>
+          <div className="w-full flex justify-start">
+            <ToggleModal selected={selected} handleToggle={handleToggle} direction={"center"} />
+          </div>
+          {/* 환율 고르기 */}
+          <div className='flex justify-between items-center pt-3'>
+            <Text className='text-xl leading-0 text-slate-600'>구매환율</Text>
+            <Text className='px-2 py-1 rounded-sm bg-slate-400'>바로구매</Text>
+          </div>
+          {/* 원 input */}
+          <WonInput format={format} parse={parse} wonValue={wonValue} setWonValue={setWonValue} />
+          <Text>즉시거래할 현재 환율을 선택했어요</Text>
+
+          {/* 원하는 금액 input */}
+          <Text>원하는 금액</Text>
+          <ExChangeInput value={exchangeValue} setValue={setExchangeValue} />
+
+          {/* 환산금액 */}
+          <Text>환산금액</Text>
+          <Text name="cal-ex">{calculatedValue == "NaN" ? 0 : {calculatedValue}}</Text>
+          <ModalCloseButton />
+          <div>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={onClose}>Close</Button>
+              <Button variant="ghost">Secondary Action</Button>
+            </ModalFooter>
+          </div>
+        </ModalContent>
+      </Modal>
+    </div>
+  );
+};
+
+export default MainPageDetail;
