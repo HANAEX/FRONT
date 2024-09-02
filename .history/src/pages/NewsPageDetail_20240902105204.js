@@ -3,8 +3,8 @@ import { Heading, Image, Text } from "@chakra-ui/react";
 import NewsBar from "../components/NewsBar";
 import { useParams } from "react-router-dom";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
-import TitleText from "../components/TitleText";
-import axios from "axios";
+import TitleText from '../components/TitleText';
+import axios from 'axios'
 
 const NewsPageDetail = () => {
   const [consumData, setConsumData] = useState([]);
@@ -13,35 +13,31 @@ const NewsPageDetail = () => {
   const [fulltext, setFulltext] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
-  // console.log( id )
+  console.log( id )
 
   useEffect(() => {
     const getUseHistory = async () => {
-      const encodedUrl = encodeURIComponent(id);
+      const encodedUrl = encodeURIComponent(id); 
       try {
-        const result = await axios.get(
-          `http://localhost:8080/api/news/detail?url=${encodedUrl}`
-        );
-        // console.log(result.data.data);
+        const result = await axios.get(`http://localhost:8080/api/news/detail?url=${encodedUrl}`);
+        console.log(result.data.data);
         setConsumData(result.data.data);
-
+        
         const state = result.data.data.state;
-        // console.log(state);
         if (state) {
-          const result2 = await axios.get(
-            `http://localhost:8080/api/news/state?state=${state}`
-          );
-          // console.log(result2.data.data);
+          const result2 = await axios.get(`http://localhost:8080/api/news/state?state=USD`);
+          console.log(result2.data.data);
           setNewsConsumData(result2.data.data); // Store the result of the second call
         }
+
       } catch (error) {
         console.log(error);
       } finally {
         setIsLoading(true);
       }
-    };
+    }
     getUseHistory();
-  }, []);
+  }, [])
 
   const handleGpttext = () => {
     setGptText(!gpttext);
@@ -57,29 +53,28 @@ const NewsPageDetail = () => {
     return text;
   }
 
-  if (!isLoading) return <div>로딩중입니다.</div>;
-
+  if (!isLoading) return <div>로딩중입니다.</div>
+  
   return (
     <div className="w-[960px] bg-slate-500 flex flex-col py-1 px-10 mt-10">
       {/* 헤더라인 */}
       <div className="bg-slate-200 mb-4">
-        <Heading size={"lg"}>{consumData.title}</Heading>
+        <Heading size={"lg"}>
+          {consumData.title}
+        </Heading>
         <Text size={"sm"} className="text-slate-700">
           2024년 8월 12일 07:58
         </Text>
       </div>
       <div className="bg-white mb-4">
-        <div className="flex">
+        <div className='flex'>
           <p className="font-semibold">ChatGPT</p>
-          <Image boxSize={"24px"} src="/image/chat-bot.png"></Image>
+          <Image boxSize={'24px'} src='/image/chat-bot.png'></Image>
         </div>
 
         <span>
-          이 기사를{" "}
-          <span className="font-semibold text-red-500">
-            {consumData.result}
-          </span>
-          로 분석했어요
+          이 기사를 <span className="font-semibold text-red-500">{consumData.result}</span>로
+          분석했어요
         </span>
       </div>
       {/* 요약box */}
@@ -111,10 +106,7 @@ const NewsPageDetail = () => {
         name="content-box"
         className="flex flex-col items-center bg-slate-100 rounded-2xl px-10 py-4"
       >
-        <Image
-          src={consumData.imageUrl}
-          className="w-[750px] h-[250px]"
-        ></Image>
+        <Image src={consumData.imageUrl} className="w-[750px] h-[250px]"></Image>
         <div className="my-6">
           {fulltext === true ? (
             <Text name="full-text">{consumData.content}</Text>
@@ -122,25 +114,19 @@ const NewsPageDetail = () => {
             <Text name="summary-text">{truncateText(consumData.content)}</Text>
           )}
         </div>
-        <div className="flex items-center">
+        <div className='flex items-center'>
           <Text name="show-fulltext" onClick={handleFulltext}>
             자세히보기
           </Text>
           {fulltext === true ? <TiArrowSortedUp /> : <TiArrowSortedDown />}
         </div>
       </div>
-      <TitleText title="관련뉴스" />
-      {newsConsumData.map((data, index) => (
-        <NewsBar
-          key={index}
-          state={data.state}
-          result={data.result}
-          url={data.url}
-          title={data.title}
-          content={data.content}
-          imageUrl={data.imageUrl}
-        />
-      ))}
+      <TitleText title="관련뉴스"/>
+      <NewsBar />
+      <NewsBar />
+      <NewsBar />
+      <NewsBar />
+      <NewsBar />
     </div>
   );
 };

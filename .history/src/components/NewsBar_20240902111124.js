@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Image } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 const NewsBar = ({ state, result, url, title, content, imageUrl }) => {
   function truncateText(text, maxLength = 50) {
     if (text.length > maxLength) {
@@ -22,12 +22,7 @@ const NewsBar = ({ state, result, url, title, content, imageUrl }) => {
           </Text>
           <Text className='text-xs mt-1 text-slate-600'>매일경제</Text>
         </div>
-        <div className='w-[68px] h-[68px] bg-white'>
-          <Image
-            src={imageUrl}
-            className="w-[68px] h-[68px] object-contain"
-          ></Image>
-        </div>
+        <div className="w-[54px] h-[54px] bg-gray-500"></div>
       </div>
     </div>
   );

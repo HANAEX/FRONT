@@ -23,7 +23,7 @@ const SemanticPage = () => {
   useEffect(() => {
     const getUseHistory = async () => {
       try {
-        const result = await axios.get("http://localhost:8080/api/sentiment");
+        const result = await axios.get("https://localhost:8080/api/sentiment");
         console.log(result.data);
         setConsumData(result.data.data);
       } catch (error) {

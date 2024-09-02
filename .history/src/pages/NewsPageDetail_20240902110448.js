@@ -134,10 +134,8 @@ const NewsPageDetail = () => {
         <NewsBar
           key={index}
           state={data.state}
-          result={data.result}
           url={data.url}
           title={data.title}
-          content={data.content}
           imageUrl={data.imageUrl}
         />
       ))}
