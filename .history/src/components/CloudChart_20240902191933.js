@@ -30,7 +30,7 @@ const WordCloudComponent = ({ words }) => {
 
   return (
     <div>
-      <canvas className='my-5'
+      <canvas className='my-4'
         ref={canvasRef}
         width={800}
         height={250}

@@ -11,10 +11,23 @@ const WordCloudComponent = ({ words }) => {
     link.rel = 'stylesheet';
     document.head.appendChild(link);
 
+    // const words = [
+    //   ['트럼프전대통령', 20, "긍정"],
+    //   ['경기침체우려', 15, "부정"],
+    //   ['5000만', 25, "긍정"],
+    //   ['전년동기대비', 10, "긍정"],
+    //   ['경기침체우려', 30, "부정"],
+    //   ['5월현지시간', 20, "부정"],
+    //   ['달러흑자', 15, "긍정"],
+    //   ['윤석열', 10, "부정"],
+    //   ['현지시간', 25, "부정"],
+    //   ["달러흑자", 30, "긍정"]
+    // ];
+
     WordCloud(canvasRef.current, {
       list: words,
-      gridSize: 7,
-      weightFactor: 0.8,
+      gridSize: 6,
+      weightFactor: 0.5,
       fontWeight : "600",
       fontFamily: 'Noto Sans KR, sans-serif',
       color: (word, weight) => {
@@ -30,7 +43,7 @@ const WordCloudComponent = ({ words }) => {
 
   return (
     <div>
-      <canvas className='my-5'
+      <canvas
         ref={canvasRef}
         width={800}
         height={250}

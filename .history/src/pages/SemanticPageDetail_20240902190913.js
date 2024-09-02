@@ -25,7 +25,6 @@ const SemanticPageDetail = () => {
         setConsumData(result.data.data[0]);
 
         const transformedWords = result.data.worddata.map(item => [item.text, item.value, item.sentiment]);
-        console.log("Transformed words", transformedWords)
         setWords(transformedWords);
 
       } catch (e) {
@@ -82,7 +81,7 @@ const SemanticPageDetail = () => {
         </div>
         <TitleText title="핫 키워드"/>
         <div className='w-full flex justify-center px-10 rounded-2xl bg-slate-50'>
-          <WordCloudComponent words={words} />
+          <WordCloudComponent />
         </div>
         <TitleText title="언급량" />
         <div className='w-full flex justify-center px-10 py-10 rounded-2xl bg-slate-50'>

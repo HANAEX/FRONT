@@ -25,7 +25,6 @@ const SemanticPageDetail = () => {
         setConsumData(result.data.data[0]);
 
         const transformedWords = result.data.worddata.map(item => [item.text, item.value, item.sentiment]);
-        console.log("Transformed words", transformedWords)
         setWords(transformedWords);
 
       } catch (e) {

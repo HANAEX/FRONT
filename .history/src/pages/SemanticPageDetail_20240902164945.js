@@ -14,20 +14,14 @@ import { countryMapperFunction } from '../data/countryMapper';
 const SemanticPageDetail = () => {
   const [ consumData, setConsumData ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ words, setWords ] = useState([]);  // words 상태 추가
   const { id } = useParams();
-  console.log(words);
+  console.log(id);
+
   useEffect(() => {
     const getUseHistory = async () => {
       try {
         const result = await axios.get(`http://localhost:8080/api/sentiment/detail?state=${id}`);
-        console.log(result.data);
         setConsumData(result.data.data[0]);
-
-        const transformedWords = result.data.worddata.map(item => [item.text, item.value, item.sentiment]);
-        console.log("Transformed words", transformedWords)
-        setWords(transformedWords);
-
       } catch (e) {
         console.error(e);
       } finally {
@@ -49,16 +43,17 @@ const SemanticPageDetail = () => {
             <div className='flex justify-between'>
               <div className="flex h-[34px] items-center">
                 <Text className='font-semibold text-lg mr-1'>{ consumData.state }/KRW</Text>
-                <Image className='w-[28px] h-[28px]' src={countryMapperFunction(consumData.state).image} />
+                <Image className='w-[34px] h-[34px]' src={countryMapperFunction(consumData.state).image} />
               </div>
               <div className="flex flex-col items-center">
-                <Image src={imageMapperFunction(consumData.semantic).image} boxSize="180px" alt="smile" />
+                <Image src="/image/smile.png" boxSize="180px" alt="smile" />
                 <Text className='font-semibold text-2xl'>{ consumData.semantic }</Text>
               </div>
               <div className='p-10'></div>
             </div>
+            {/* progressbar */}
             <ProgressBar
-              completed={ Number( consumData.positive ).toFixed(1) }
+              completed={80}
               width="600px"
               height="35px"
               bgColor="#1A6AEB"
@@ -68,12 +63,12 @@ const SemanticPageDetail = () => {
               <div className="flex items-end">
                 <Text className='text-xl leading-0 text-red-500'>긍정</Text>
                 <Text className='text-2xl font-semibold leading-0 text-red-500'>
-                { Number( consumData.positive ).toFixed(1) }%
+                  81.9%
                 </Text>
               </div>
               <div className="flex items-end">
                 <Text className='text-2xl font-semibold leading-0 text-blue-500'>
-                  { Number( consumData.nagative ).toFixed(1) }%
+                  19.1%
                 </Text>
                 <Text className='text-xl leading-0 text-blue-500'>부정</Text>
               </div>
@@ -82,7 +77,7 @@ const SemanticPageDetail = () => {
         </div>
         <TitleText title="핫 키워드"/>
         <div className='w-full flex justify-center px-10 rounded-2xl bg-slate-50'>
-          <WordCloudComponent words={words} />
+          <WordCloudComponent />
         </div>
         <TitleText title="언급량" />
         <div className='w-full flex justify-center px-10 py-10 rounded-2xl bg-slate-50'>

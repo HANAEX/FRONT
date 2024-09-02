@@ -77,7 +77,7 @@ const SemanticPage = () => {
               semantic={data.semantic}
               persent={data.positive}
               positive={data.positive}
-              negative={data.nagative}
+              nagative={data.nagative}
             />
           </SwiperSlide>
         ))}

@@ -10,7 +10,8 @@ import { Link } from 'react-router-dom';
 
 const SementicCard = ({ name, imageUrl, faceUrl, semantic, persent, positive, negative }) => {
   return (
-    <Link to={"/SemanticPageDetail/" + name } name="card-container" className='w-[300px] h-[450px] p-5 bg-slate-50 rounded-2xl'>
+    <Link to={"/SemanticPageDetail/" + name.slice(2)} name="card-container" className='w-[300px] h-[450px] p-5 bg-slate-50 rounded-2xl'>
+      { console.log(name.slice(2)) }
       <HStack>
         <Text className='font-bold text-1xl'>
           { name }
@@ -19,10 +20,10 @@ const SementicCard = ({ name, imageUrl, faceUrl, semantic, persent, positive, ne
           <Image src={imageUrl} alt='america' />
         </Box>
       </HStack>
-      <Box className='flex justify-center mt-3'>
-        <Image className='w-[172px] h-[172px]' src={ faceUrl } alt='smile' />
+      <Box className='flex justify-center'>
+        <Image className='w-[168px] h-[168px]' src={ faceUrl } alt='smile' />
       </Box>
-      <Text className='font-bold text-2xl'>
+      <Text fontSize='1xl'>
         { semantic }
       </Text>
       <ProgressBar

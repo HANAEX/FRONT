@@ -9,8 +9,10 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { Link } from 'react-router-dom';
 
 const SementicCard = ({ name, imageUrl, faceUrl, semantic, persent, positive, negative }) => {
+  console.log(nagative);
   return (
     <Link to={"/SemanticPageDetail/" + name } name="card-container" className='w-[300px] h-[450px] p-5 bg-slate-50 rounded-2xl'>
+      {/* { console.log(name.slice(2)) } */}
       <HStack>
         <Text className='font-bold text-1xl'>
           { name }

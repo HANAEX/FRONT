@@ -75,9 +75,9 @@ const SemanticPage = () => {
               imageUrl={countryMapperFunction(data.state).image}
               faceUrl={imageMapperFunction(data.semantic).image}
               semantic={data.semantic}
-              persent={data.positive}
+              persent={data.positive > data.nagative ? data.positive : data.nagative}
               positive={data.positive}
-              negative={data.nagative}
+              nagative={data.nagative}
             />
           </SwiperSlide>
         ))}

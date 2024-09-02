@@ -11,8 +11,8 @@ import "swiper/css/pagination";
 import ToggleSwitch from "../components/Toggle";
 import SementicCard from "../components/SementicCard";
 
+import { imageMapper } from "../utils/imageMapper"; // imageMapper import
 import { imageMapperFunction } from '../data/imageMapper';
-import { countryMapperFunction } from '../data/countryMapper';
 
 const SemanticPage = () => {
   const [consumData, setConsumData] = useState([]);
@@ -71,13 +71,13 @@ const SemanticPage = () => {
           <SwiperSlide>
             <SementicCard
               key={index}
-              name={data.state}
-              imageUrl={countryMapperFunction(data.state).image}
+              name={data.name}
+              imageUrl={data.imageUrl}
               faceUrl={imageMapperFunction(data.semantic).image}
               semantic={data.semantic}
-              persent={data.positive}
+              persent={data.persent}
               positive={data.positive}
-              negative={data.nagative}
+              nagative={data.nagative}
             />
           </SwiperSlide>
         ))}

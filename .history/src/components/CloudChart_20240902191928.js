@@ -14,7 +14,7 @@ const WordCloudComponent = ({ words }) => {
     WordCloud(canvasRef.current, {
       list: words,
       gridSize: 7,
-      weightFactor: 0.8,
+      weightFactor: 0.7,
       fontWeight : "600",
       fontFamily: 'Noto Sans KR, sans-serif',
       color: (word, weight) => {
@@ -30,7 +30,7 @@ const WordCloudComponent = ({ words }) => {
 
   return (
     <div>
-      <canvas className='my-5'
+      <canvas className='my-4'
         ref={canvasRef}
         width={800}
         height={250}

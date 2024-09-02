@@ -14,20 +14,14 @@ import { countryMapperFunction } from '../data/countryMapper';
 const SemanticPageDetail = () => {
   const [ consumData, setConsumData ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ words, setWords ] = useState([]);  // words 상태 추가
   const { id } = useParams();
-  console.log(words);
+  console.log(id);
+
   useEffect(() => {
     const getUseHistory = async () => {
       try {
         const result = await axios.get(`http://localhost:8080/api/sentiment/detail?state=${id}`);
-        console.log(result.data);
         setConsumData(result.data.data[0]);
-
-        const transformedWords = result.data.worddata.map(item => [item.text, item.value, item.sentiment]);
-        console.log("Transformed words", transformedWords)
-        setWords(transformedWords);
-
       } catch (e) {
         console.error(e);
       } finally {
@@ -57,6 +51,7 @@ const SemanticPageDetail = () => {
               </div>
               <div className='p-10'></div>
             </div>
+            {/* progressbar */}
             <ProgressBar
               completed={ Number( consumData.positive ).toFixed(1) }
               width="600px"
@@ -82,7 +77,7 @@ const SemanticPageDetail = () => {
         </div>
         <TitleText title="핫 키워드"/>
         <div className='w-full flex justify-center px-10 rounded-2xl bg-slate-50'>
-          <WordCloudComponent words={words} />
+          <WordCloudComponent />
         </div>
         <TitleText title="언급량" />
         <div className='w-full flex justify-center px-10 py-10 rounded-2xl bg-slate-50'>
