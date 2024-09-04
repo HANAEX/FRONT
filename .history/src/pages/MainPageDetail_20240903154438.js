@@ -1,0 +1,374 @@
+// MainPageDetail
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText,
+  StatArrow,
+  Button,
+  Modal,
+  ModalOverlay,
+  useDisclosure,
+  Image,
+  Divider,
+} from "@chakra-ui/react";
+
+import MainRecommandButton from "../components/MainRecommandButton";
+import StockBox from "../components/StockBox";
+import Account from "../components/Account";
+import MainChart from "../components/MainChart";
+import FxModal from "../modal/FxModal";
+import axios from "axios";
+import DireactModal from '../modal/DireactModal';
+import ReserveModal from '../modal/ReserveModal';
+import SelectModal from '../modal/SelectModal';
+import SelectButton from '../components/SelectButton';
+import ModifyModal from '../modal/ModifyModal';
+import { useParams } from "react-router-dom";
+const MainPageDetail = () => {
+  // current price 받아오기
+  const [consumData, setConsumData] = useState([]);
+  const [currentInvestPrice, setCurrentInvestPrice] = useState(0);
+  const [currentSellPrice, setCurrentSellPrice] = useState(0);
+  const [isPriceLoading, setIsPriceLoading] = useState(false);
+  const [showClander, setShowClander] = useState(false);
+  const [value, setValue] = useState({
+    startDate: null,
+    endDate: null,
+  });
+  // 거래 내역 저장용 상태 변수
+  const [transactionHistory, setTransactionHistory] = useState([]);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+
+  // Modal 관련 변수
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selected, setSelected] = useState(true);
+  const [isFixed, setIsFixed] = useState(false);
+  const [modalType, setModalType] = useState("FxModal");
+
+  // WonInput 관련 변수
+  const format = (val) => `$` + val;
+  const parse = (val) => val.replace(/^\$/, "");
+  const [wonValue, setWonValue] = useState(0);
+  const [vendWonValue, setVendWonValue] = useState(0);
+  const [exchangeValue, setExchangeValue] = useState(0); // ExChangeInput 값을 저장할 상태
+  const [calculatedValue, setCalculatedValue] = useState(0); // 계산 결과를 저장할 상태
+
+  // 토글 핸들러
+  const handleToggle = () => {
+    setSelected(!selected);
+  };
+  const { id } = useParams();
+  console.log("id =", id)
+  // axios
+  // 내가 살떄 내가 팔때 받아오는 코드
+  useEffect(() => {
+    const getUseHistory = async () => {
+      try {
+        const result = await axios.get(
+          `http://localhost:8081/api/mainpage/detail?state=${id}`
+        );
+        const currentData = result.data.todayData;
+        console.log(result)
+        setConsumData(currentData);
+        setCurrentInvestPrice(result.data.todayData[0].cash_buy);
+        setCurrentSellPrice(result.data.todayData[0].cash_sell);
+        setWonValue(result.data.todayData[0].cash_buy);
+        setVendWonValue(result.data.todayData[0].cash_sell);
+        // console.log(currentData);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsPriceLoading(true);
+      }
+    };
+    getUseHistory();
+  }, []);
+
+  // 날짜 초기화
+  const handleSetValue = () => {
+    setValue({
+      startDate: null,
+      endDate: null,
+    })
+  }
+  // wonValue 또는 exchangeValue가 변경될 때 계산 수행
+  useEffect(() => {
+    const result = parseFloat(exchangeValue) * parseFloat(wonValue);
+    setCalculatedValue(isNaN(result) ? 0 : result.toFixed(2)); // 소수점 2자리까지 결과 표시
+  }, [exchangeValue, wonValue]);
+
+  useEffect(() => {
+    const result = parseFloat(exchangeValue) * parseFloat(vendWonValue);
+    setCalculatedValue(isNaN(result) ? 0 : result.toFixed(2)); // 소수점 2자리까지 결과 표시
+  }, [exchangeValue, vendWonValue]);
+
+
+  // calender 로직
+  useEffect(() => {
+    if (wonValue === currentInvestPrice) {
+      setShowClander(true);
+    } else {
+      setShowClander(false);
+    }
+  }, [wonValue, currentInvestPrice])
+
+  useEffect(() => {
+    if (vendWonValue === currentSellPrice) {
+      setShowClander(true);
+    } else {
+      setShowClander(false);
+    }
+  }, [vendWonValue, currentSellPrice])
+
+  // 스크롤과 고정 로직
+  const scrollToSection = (sectionName) => {
+    const section = document.querySelector(`div[name="${sectionName}"]`);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const recommandSection = document.querySelector(
+        `div[name="recommand-section"]`
+      );
+      const sectionTop = recommandSection.getBoundingClientRect().top;
+
+      setIsFixed(sectionTop <= 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // ReservedCard 클릭 시 호출되는 함수
+  const handleReservedCardClick = (index) => {
+    setSelectedTransaction({ ...transactionHistory[index], index });
+    setModalType("ReservedModal");
+    onOpen();
+  };
+
+  // Modal type 변경
+  // 구매하기 버튼 클릭 시 거래 내역에 추가
+  const handlePurchaseClick = () => {
+    if (!showClander) {
+      const currentValue = selected ? wonValue : vendWonValue;
+      const currentDate = new Date().toISOString().split('T')[0];
+      const transactionType = selected ? "살래요" : "팔래요";
+      
+      setTransactionHistory(prevHistory => [
+        ...prevHistory,
+        {
+          value: currentValue,
+          date: currentDate,
+          type: transactionType,
+          rangeDate: value,
+          exchangeValue: exchangeValue
+        }
+      ]);
+    }
+
+    if (wonValue === currentInvestPrice) {
+      setModalType("DirectModal");
+    } else {
+      setModalType("ReserveModal");
+    }
+    handleSetValue();
+  };
+  // ReservedModal에서 값이 변경될 때 호출되는 함수
+  const handleTransactionUpdate = (updatedValue, updatedExchangeValue) => {
+    setTransactionHistory((prevHistory) =>
+      prevHistory.map((item, idx) =>
+        idx === selectedTransaction.index
+          ? { ...item, value: updatedValue, exchangeValue: updatedExchangeValue }
+          : item
+      )
+    );
+    onClose();
+  };
+
+  // Modal type 변경
+  const handleSelectClick = () => {
+    setModalType("SelectModal")
+  }
+
+  // FxModal로 돌아가는 기능 추가
+  const handleBackToFxModal = () => {
+    setModalType("FxModal");
+  };
+
+  if (!isPriceLoading) return <div>로딩중입니다.</div>;
+
+  return (
+    <div className="w-[960px] bg-slate-500 flex flex-col py-1 px-10">
+      {/* 살 때 팔 때 */}
+      <div className="w-full flex justify-center px-48 py-2 rounded-lg my-2 bg-slate-100">
+        <Stat className="flex justify-center">
+          <StatLabel>내가 살 때</StatLabel>
+          <StatNumber>{currentInvestPrice}</StatNumber>
+
+          <StatHelpText>
+            <StatArrow type="Minusclon" />
+            {consumData[0].compared_to_previous}
+          </StatHelpText>
+        </Stat>
+
+        <Stat className="flex justify-center">
+          <StatLabel>내가 팔 때</StatLabel>
+          <StatNumber>{currentSellPrice}</StatNumber>
+          <StatHelpText>
+            <StatArrow type="Minusclon" />
+            {consumData[0].compared_to_previous}
+          </StatHelpText>
+        </Stat>
+      </div>
+      <div className="flex flex-col items-center bg-slate-100 rounded-lg py-5">
+        {/* 메인 차트 */}
+        <MainChart id={id}/>
+        {/* 최고가 최저가 */}
+        <div className="flex gap-3 py-1">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-slate-500 rounded-full"></div>
+            <Text>최저가-최고가</Text>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-slate-500 rounded-full"></div>
+            <Text>최저가-최고가</Text>
+          </div>
+        </div>
+      </div>
+      {/* 구매 버튼 판매 버튼 */}
+      <div className="flex justify-center py-2 bg-slate-100 gap-6 my-2 rounded-lg">
+        <Button
+          onClick={onOpen}
+          colorScheme="teal"
+          variant="outline"
+          height="42px"
+          width="200px"
+        >
+          살래요
+        </Button>
+        <SelectButton onOpen={onOpen} handleSelectClick={handleSelectClick} />
+      </div>
+      <div
+        name="recommand-section"
+        className="px-3 py-5 flex bg-slate-300 mt-1 gap-5"
+        style={{ overflow: "visible" }}
+      >
+        {isFixed && (
+          <div
+            name="fake-section"
+            className="bg-slate-50 px-5 py-5 flex-none w-56"
+          ></div>
+        )}
+        <div
+          name="left-section"
+          className={`bg-slate-50 px-5 py-5 flex-none w-56 ${
+            isFixed ? "fixed top-0 z-10" : ""
+          }`}
+          style={{ top: isFixed ? "10px" : "auto" }}
+        >
+          <div className="flex items-center mb-1">
+            <Text className="text-2xl">USD/KRW</Text>
+            <Image boxSize={"42px"} src="/image/america_flag.png"></Image>
+          </div>
+
+          <MainRecommandButton
+            text={"투자포인트"}
+            scrollToSection={() => scrollToSection("1-1")}
+          />
+          <MainRecommandButton
+            text={"추천주식"}
+            scrollToSection={() => scrollToSection("1-2")}
+          />
+          <MainRecommandButton
+            text={"추천상품"}
+            scrollToSection={() => scrollToSection("1-3")}
+          />
+        </div>
+        <div name="right-section" className="bg-slate-50 p-5 flex-1">
+          <div name="1-1" className="bg-slate-400 h-80 mt-6"></div>
+          <div name="1-2" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+            <Text className="text-xl font-semibold leading-0">
+              주식추전 TOP 3
+            </Text>
+            <Divider className="my-3" orientation="horizontal" />
+            <div className="flex justify-around">
+              <StockBox />
+              <StockBox />
+              <StockBox />
+            </div>
+          </div>
+          <div name="1-3" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+            <Text className="text-xl font-semibold leading-0">상품추천</Text>
+            <Divider className="my-3" orientation="horizontal" />
+            <Account />
+            <Account />
+            <Account />
+          </div>
+          <div name="1-4" className="bg-slate-400 h-80 mt-6 px-6 py-3"></div>
+        </div>
+      </div>
+
+      {/* 모달 */}
+      <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
+        <ModalOverlay />
+        {modalType === "FxModal" && (
+          <FxModal
+            selected={selected}
+            handleToggle={handleToggle}
+            format={format}
+            parse={parse}
+            wonValue={wonValue}
+            vendWonValue={vendWonValue}
+            setWonValue={setWonValue}
+            setVendWonValue={setVendWonValue}
+            exchangeValue={exchangeValue}
+            setExchangeValue={setExchangeValue}
+            calculatedValue={calculatedValue}
+            onClose={onClose}
+            onPurchaseClick={handlePurchaseClick} // 구매 버튼 클릭 핸들러
+            showClander={showClander}
+            value={value}
+            setValue={setValue}
+            handleSetValue={handleSetValue}
+
+          />
+        )}
+        {modalType === "DirectModal" && 
+          <DireactModal 
+            onClose={onClose}
+            onPurchaseClick={handleBackToFxModal}
+          />}
+        {modalType === "ReserveModal" && 
+          <ReserveModal 
+            onClose={onClose}
+            onPurchaseClick={handleBackToFxModal}
+            value={value}
+          />}
+        {modalType === "SelectModal" && 
+          <SelectModal 
+            onClose={onClose}
+            onPurchaseClick={handleBackToFxModal}
+            transactionHistory={transactionHistory}
+            handleReservedCardClick={handleReservedCardClick}
+          />}
+        {modalType === "ReservedModal" && selectedTransaction && (
+          <ModifyModal
+            transaction={selectedTransaction}
+            onClose={onClose}
+            onUpdate={handleTransactionUpdate}
+          />
+)}
+      </Modal>
+    </div>
+  );
+};
+
+export default MainPageDetail;
