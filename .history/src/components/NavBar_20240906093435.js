@@ -23,6 +23,7 @@ const NavBar = () => {
         <Link to={"/Login"}>
           <IoPersonCircleOutline className='w-8 h-8'/>
         </Link>
+        
       </div>
       <div className='border'></div>
     </nav>

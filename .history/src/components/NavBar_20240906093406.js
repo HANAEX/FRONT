@@ -20,9 +20,10 @@ const NavBar = () => {
           <Link to={"/Semantic"}><Menu menu_name="오늘의 온도"/></Link>
           <Link to={"/Board"}><Menu menu_name="게시판"/></Link>
         </div>
-        <Link to={"/Login"}>
+        <Link to={"/LoginPage"}>
           <IoPersonCircleOutline className='w-8 h-8'/>
         </Link>
+        
       </div>
       <div className='border'></div>
     </nav>
