@@ -162,10 +162,15 @@ const MyPage = () => {
                     <Text className="leading-0 text-2xl mr-1">USD</Text>
                     <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
-                  <div 
-                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
-                    style={{ maxHeight: "500px", overflowY: "auto" }}
-                  >
+                  <div className="bg-white w-full rounded-2xl px-8 py-6 mt-4">
+                    {/* <TransactionExchangeAccount 
+                      currency_code={filteredTransactions[1].currency_code}
+                      transaction_type={filteredTransactions[1].transaction_type}
+                      deposit_amount={filteredTransactions[1].deposit_amount}
+                      withdrawal_amount={filteredTransactions[1].withdrawal_amount}
+                      conclusion_status={filteredTransactions[1].conclusion_status}
+                      transaction_date={filteredTransactions[1].transaction_date}
+                    /> */}
                     <Text className="text-xl font-bold">외환거래내역</Text>
                     {filteredTransactions.map((transaction, index) => (
                       <TransactionExchangeAccount

@@ -162,22 +162,15 @@ const MyPage = () => {
                     <Text className="leading-0 text-2xl mr-1">USD</Text>
                     <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
-                  <div 
-                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
-                    style={{ maxHeight: "500px", overflowY: "auto" }}
-                  >
-                    <Text className="text-xl font-bold">외환거래내역</Text>
-                    {filteredTransactions.map((transaction, index) => (
-                      <TransactionExchangeAccount
-                        key={index}
-                        currency_code={transaction.currency_code}
-                        transaction_type={transaction.transaction_type}
-                        deposit_amount={transaction.deposit_amount}
-                        withdrawal_amount={transaction.withdrawal_amount}
-                        conclusion_status={transaction.conclusion_status}
-                        transaction_date={transaction.transaction_date}
-                      />
-                    ))}
+                  <div className="bg-white w-full rounded-2xl px-8 py-6 mt-4">
+                    <TransactionExchangeAccount 
+                      currency_code={filteredTransactions[0].currency_code}
+                      transaction_type={filteredTransactions[0].transaction_type}
+                      deposit_amount={filteredTransactions[0].deposit_amount}
+                      withdrawal_amount={filteredTransactions[0].withdrawal_amount}
+                      conclusion_status={filteredTransactions[0].conclusion_status}
+                      transaction_date={filteredTransactions[0].transaction_date}
+                    />
                   </div>
                 </div>
               </TabPanel>

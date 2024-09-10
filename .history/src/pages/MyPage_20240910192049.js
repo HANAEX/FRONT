@@ -99,7 +99,7 @@ const MyPage = () => {
             <TabPanels>
               <TabPanel>
                 <div className="flex flex-col items-start ml-3">
-                  <Text className="font-bold text-xl mt-3">
+                  <Text className="font-medium text-xl mt-3">
                     {accountsData[0].accounts_name}
                   </Text>
                   <Text className="text-slate-600 text-lg">
@@ -152,32 +152,21 @@ const MyPage = () => {
               <TabPanel>
                 {/* 2번째 */}
                 <div className="flex flex-col items-start ml-3">
-                  <Text className="font-bold text-xl mt-3">
+                  <Text className="font-medium text-xl mt-3">
                     하나밀리언달러통장
                   </Text>
                   <Text className="text-slate-600 text-lg">
                     342-910012-87238
                   </Text>
                   <div className="flex items-end my-2">
-                    <Text className="leading-0 text-2xl mr-1">USD</Text>
-                    <Text className="font-bold leading-0 text-3xl">12.00</Text>
+                    <Text className="leading-0 text-2xl">USD</Text>
+                    <Text className="font-semibold leading-0 text-3xl">12</Text>
                   </div>
-                  <div 
-                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
-                    style={{ maxHeight: "500px", overflowY: "auto" }}
-                  >
-                    <Text className="text-xl font-bold">외환거래내역</Text>
-                    {filteredTransactions.map((transaction, index) => (
-                      <TransactionExchangeAccount
-                        key={index}
-                        currency_code={transaction.currency_code}
-                        transaction_type={transaction.transaction_type}
-                        deposit_amount={transaction.deposit_amount}
-                        withdrawal_amount={transaction.withdrawal_amount}
-                        conclusion_status={transaction.conclusion_status}
-                        transaction_date={transaction.transaction_date}
-                      />
-                    ))}
+                  <div className="bg-white w-full rounded-2xl px-8 py-6 mt-4">
+                    <TransactionExchangeAccount 
+                      key={index}
+
+                    />
                   </div>
                 </div>
               </TabPanel>

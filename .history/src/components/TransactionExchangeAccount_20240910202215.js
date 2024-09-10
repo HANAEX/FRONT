@@ -20,6 +20,7 @@ const TransactionExchangeAccount = ({
       <Text className={`flex justify-center w-[60px] border ${borderColor} rounded-sm mt-5`}>
         {transactionText}
       </Text>
+
       <div className="flex justify-between items-center">
         <div className="flex items-center mt-3">
           {/* 국가 이미지 */}
@@ -27,6 +28,7 @@ const TransactionExchangeAccount = ({
             src={countryMapperFunction(currency_code).image}
             className="h-[28px] w-[28px]"
           />
+
           {/* transaction_type에 따른 금액 표시 */}
           {transaction_type === "buy" ? (
             <Text className="ml-3 font-medium text-2xl">

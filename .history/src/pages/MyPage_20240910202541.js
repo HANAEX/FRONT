@@ -163,7 +163,7 @@ const MyPage = () => {
                     <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
                   <div 
-                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
+                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4 scroll-container"
                     style={{ maxHeight: "500px", overflowY: "auto" }}
                   >
                     <Text className="text-xl font-bold">외환거래내역</Text>

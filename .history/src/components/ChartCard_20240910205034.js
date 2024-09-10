@@ -33,13 +33,13 @@ const ChartCard = ({
   return (
     <div
       name="card-container"
-      className="w-[250px] h-[350px] px-8 py-4 bg-slate-50 rounded-2xl drop-shadow-2xl"
+      className="w-[20px] h-[350px] px-8 py-4 bg-slate-50 rounded-2xl drop-shadow-2xl"
     >
       {console.log(increase >= 0 ? "#FF0000" : "#524CFF")}
       {/* card 상단 */}
       <div
         name="card-top"
-        className="bg-slate-100 flex justify-between items-center"
+        className="bg-slate-100 py-0 flex justify-between items-center"
       >
         <Text>{index}</Text>
         <div onClick={handleHeart}>

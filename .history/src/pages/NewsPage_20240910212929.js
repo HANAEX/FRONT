@@ -65,7 +65,7 @@ const NewsPage = () => {
           pagination={{
             clickable: true,
           }}
-          // style={{ width: 'auto', height: 'auto' }}
+          style={{ width: 'auto', height: 'auto' }}
           modules={[Pagination]}
           className="mySwiper"
         >

@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 
 const NewsCard = ({ state, url, title, content, image_url, result }) => {
   return (
-    <>
-    {/* // <Link
-    //   to={"/NewsPageDetail/" + encodeURIComponent(url)}
-    //   name="card-container"
-    //   className="!w-[300px] !h-[310px] bg-white px-6 pt-3 rounded-2xl drop-shadow-xl"
-    // > */}
+    <Link
+      to={"/NewsPageDetail/" + encodeURIComponent(url)}
+      name="card-container"
+      className="w-[300px] h-[310px] bg-white px-6 pt-3 rounded-2xl drop-shadow-xl"
+    >
       <img
         src={image_url}
         alt="News Image"
@@ -36,8 +35,7 @@ const NewsCard = ({ state, url, title, content, image_url, result }) => {
           </Text>
         </div>
       </div>
-    {/* // </Link> */}
-    </>
+    </Link>
   );
 };
 

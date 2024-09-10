@@ -33,7 +33,7 @@ const ChartCard = ({
   return (
     <div
       name="card-container"
-      className="w-[250px] h-[350px] px-8 py-4 bg-slate-50 rounded-2xl drop-shadow-2xl"
+      className="w-[300px] h-[350px] px-8 py-4 bg-slate-50 rounded-2xl drop-shadow-2xl"
     >
       {console.log(increase >= 0 ? "#FF0000" : "#524CFF")}
       {/* card 상단 */}

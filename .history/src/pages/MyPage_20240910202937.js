@@ -84,7 +84,7 @@ const MyPage = () => {
                 <Text className="text-2xl">내 계좌</Text>
               </Tab>
               <Tab>
-                <Text className="text-2xl">보유외환</Text>
+                <Text className="text-2xl">외화거래내역</Text>
               </Tab>
               <Tab>
                 <Text className="text-2xl">나의관심</Text>
@@ -163,7 +163,7 @@ const MyPage = () => {
                     <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
                   <div 
-                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
+                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4 scroll-container"
                     style={{ maxHeight: "500px", overflowY: "auto" }}
                   >
                     <Text className="text-xl font-bold">외환거래내역</Text>
