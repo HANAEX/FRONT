@@ -282,7 +282,7 @@ const MyPage = () => {
             </TabPanels>
           </Tabs>
 
-          <Modal isOpen={isOpen} onClose={onClose} isCentered>
+          <Modal w={900} isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
             <ModalContent >
               {/* <ModalHeader>Modal Title</ModalHeader> */}
@@ -292,7 +292,7 @@ const MyPage = () => {
                 </Text>
               </div>
               <ModalCloseButton />
-              <ModalBody >
+              <ModalBody>
                 <Example accountsData={accountsData} />
               </ModalBody>
 

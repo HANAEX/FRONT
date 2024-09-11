@@ -71,7 +71,7 @@ const NewsPage = () => {
           className="mySwiper"
         >
           {filteredData.map((data, index) => (
-            <SwiperSlide style={{width: "300px", height: "310px", boxShadow: "5px 5px 5px gray"}}>
+            <SwiperSlide style={{width: "300px", height: "310px", boxShadow: "10px 5px 5px red"}}>
               <NewsCard
                 key={index}
                 url={data.url}

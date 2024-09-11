@@ -284,7 +284,7 @@ const MyPage = () => {
 
           <Modal isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
-            <ModalContent >
+            <ModalContent>
               {/* <ModalHeader>Modal Title</ModalHeader> */}
               <div className="flex justify-center">
                 <Text className="py-4 font-semibold text-xl mb-2">
@@ -292,7 +292,7 @@ const MyPage = () => {
                 </Text>
               </div>
               <ModalCloseButton />
-              <ModalBody >
+              <ModalBody>
                 <Example accountsData={accountsData} />
               </ModalBody>
 

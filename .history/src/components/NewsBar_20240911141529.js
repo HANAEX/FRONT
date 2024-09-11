@@ -26,7 +26,7 @@ const NewsBar = ({ state, result, url, title, content, imageUrl }) => {
         <div className='w-[68px] h-[68px] bg-white'>
           <Image
             src={imageUrl}
-            className="w-[68px] h-[68px] rounded-2xl"
+            className="w-[68px] h-[68px] rounded-3xl"
           ></Image>
         </div>
       </div>

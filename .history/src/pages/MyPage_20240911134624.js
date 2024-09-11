@@ -16,14 +16,13 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  Button
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import TransactionAccount from "../components/TransactionAccount";
 import TransactionExchangeAccount from "../components/TransactionExchangeAccount";
 import "../css/style.css";
-import Example from "../components/PieChart";
+import Example from '../components/PieChart';
 
 const MyPage = () => {
   const user = useSelector((state) => state.user.user);
@@ -284,26 +283,16 @@ const MyPage = () => {
 
           <Modal isOpen={isOpen} onClose={onClose} isCentered>
             <ModalOverlay />
-            <ModalContent >
-              {/* <ModalHeader>Modal Title</ModalHeader> */}
-              <div className="flex justify-center">
-                <Text className="py-4 font-semibold text-xl mb-2">
-                  내 외화자산
-                </Text>
-              </div>
+            <ModalContent>
+              <ModalHeader>Modal Title</ModalHeader>
               <ModalCloseButton />
-              <ModalBody >
-                <Example accountsData={accountsData} />
+              <ModalBody>
+                <Example accountsData={accountsData} />  {/* accountsData를 Prop으로 전달 */}
               </ModalBody>
 
               <ModalFooter>
-                <Button
-                  colorScheme="gray"
-                  mr={3}
-                  onClick={onClose}
-                >
-                  닫기
-                </Button>
+                <button onClose={onClose}></button>
+                <button variant="ghost">Secondary Action</button>
               </ModalFooter>
             </ModalContent>
           </Modal>

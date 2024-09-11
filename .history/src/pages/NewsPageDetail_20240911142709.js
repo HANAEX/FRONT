@@ -69,7 +69,7 @@
 //       <div className="mb-4">
 //         <Heading size={"lg"}>{consumData.title}</Heading>
 //         <Text size={"sm"} className="text-slate-700">
-//           2024년 8월 12일 07:12
+//           2024년 8월 12일 07:58
 //         </Text>
 //       </div>
 //       <div className="mb-4">
@@ -270,14 +270,14 @@ const NewsPageDetail = () => {
         <div className="my-6">
           {fulltext === true
             ? splitParagraphs(consumData.content).map((paragraph, index) => (
-                <p key={index} className="chakra-text css-rszk63" name="full-text" style={{ marginBottom: '1.5rem' }}>
+                <Text key={index} name="full-text" mb={6}>
                   {paragraph}
-                </p>
+                </Text>
               ))
             : splitParagraphs(truncateText(consumData.content)).map((paragraph, index) => (
-                <p key={index} className="chakra-text css-rszk63" name="summary-text" style={{ marginBottom: '1.5rem' }}>
+                <Text key={index} name="summary-text" mb={6}>
                   {paragraph}
-                </p>
+                </Text>
               ))}
         </div>
         <div className="flex items-center">

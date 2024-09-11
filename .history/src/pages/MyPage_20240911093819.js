@@ -7,23 +7,13 @@ import {
   Tab,
   TabPanel,
   TabIndicator,
-  Image,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
-  Button
+  Image
 } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import TransactionAccount from "../components/TransactionAccount";
-import TransactionExchangeAccount from "../components/TransactionExchangeAccount";
-import "../css/style.css";
-import Example from "../components/PieChart";
+import TransactionExchangeAccount from '../components/TransactionExchangeAccount';
+import '../css/style.css';
 
 const MyPage = () => {
   const user = useSelector((state) => state.user.user);
@@ -31,7 +21,6 @@ const MyPage = () => {
   const [transactionsData, setTransactionsData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [filteredTransactions, setFilteredTransactions] = useState(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // 초기 잔액 설정
   const initialBalance = 1000000;
@@ -40,9 +29,7 @@ const MyPage = () => {
     // API 호출
     const fetchAccountsData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8082/api/getallaccount"
-        );
+        const response = await axios.get("http://localhost:8082/api/getallaccount");
         setAccountsData(response.data.accounts);
         setTransactionsData(response.data.transactions);
 
@@ -51,8 +38,7 @@ const MyPage = () => {
           (transaction) => transaction.conclusion_status === "completed"
         );
         setFilteredTransactions(completedTransactions);
-        console.log(completedTransactions);
-        console.log(accountsData);
+        console.log(completedTransactions)
       } catch (error) {
         console.error("Error fetching account data:", error);
       } finally {
@@ -64,12 +50,7 @@ const MyPage = () => {
   }, []);
 
   // 잔액을 계산하는 함수 (setState 사용하지 않고 계산)
-  const calculateNewBalance = (
-    transaction_type,
-    withdrawal_amount,
-    deposit_amount,
-    currentBalance
-  ) => {
+  const calculateNewBalance = (transaction_type, withdrawal_amount, deposit_amount, currentBalance) => {
     if (transaction_type === "buy") {
       return currentBalance - withdrawal_amount;
     } else if (transaction_type === "sell") {
@@ -83,8 +64,7 @@ const MyPage = () => {
     return truncatedNumber.toLocaleString("en-US");
   }
 
-  if (!isLoading || !filteredTransactions || !accountsData)
-    return <div>로딩중입니다.</div>;
+  if (!isLoading || !filteredTransactions || !accountsData) return <div>로딩중입니다.</div>;
 
   let currentBalance = initialBalance; // 여기서 거래 내역마다 잔액을 갱신할 변수
 
@@ -137,10 +117,11 @@ const MyPage = () => {
                   </Text>
                 </div>
 
-                <div
+                <div 
                   className="bg-white rounded-2xl px-8 py-6 mt-4 scroll-container"
                   style={{ maxHeight: "500px", overflowY: "auto" }}
-                >
+                  
+                  >
                   <Text className="text-xl font-bold">거래내역</Text>
                   {filteredTransactions.map((transaction, index) => {
                     // 거래가 처리된 후 새로운 잔액 계산
@@ -182,7 +163,7 @@ const MyPage = () => {
                     <Text className="leading-0 text-2xl mr-1">USD</Text>
                     <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
-                  <div
+                  <div 
                     className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
                     style={{ maxHeight: "500px", overflowY: "auto" }}
                   >
@@ -207,106 +188,28 @@ const MyPage = () => {
                   <Text className="font-bold text-xl mt-3">
                     하나밀리언달러통장
                   </Text>
-                  <div className="flex w-full justify-between">
-                    <Text className="text-slate-600 text-lg">
-                      342-910012-87238
-                    </Text>
-                    <Text className="font-semibold" onClick={onOpen}>
-                      자세히보기
-                    </Text>
-                  </div>
-
-                  <div className="bg-white w-full rounded-2xl px-8 py-6 mt-4">
-                    <div className="flex justify-between">
-                      <Text className="text-2xl font-bold">보유자산</Text>
-                      <div className="flex gap-1">
-                        <Image
-                          className="w-[24px] h-[24px]"
-                          src="/image/usd_flag.png"
-                        ></Image>
-                        <Text className="text-2xl font-bold">USD</Text>
-                        <Text className="text-2xl font-bold">12</Text>
+                  <Text className="text-slate-600 text-lg">
+                    342-910012-87238
+                  </Text>
+                  <div 
+                    className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
+                  >
+                    <div className='flex'>
+                      <Text>보유자산</Text>
+                      <div className='flex'>
+                        <Image src='/image/usd_flag.png'>
+                        </Image>
+                        <Text>USD</Text>
+                        <Text>12</Text>
                       </div>
                     </div>
-
-                    <div className="border my-3"></div>
-
-                    <div className="flex justify-between">
-                      <Text className="text-xl font-medium">
-                        외화대가외화금액
-                      </Text>
-                      <div className="flex gap-1">
-                        <Image
-                          className="w-[24px] h-[24px]"
-                          src="/image/usd_flag.png"
-                        ></Image>
-                        <Text className="text-xl font-medium">USD</Text>
-                        <Text className="text-xl font-medium">12</Text>
-                      </div>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <Text className="text-xl font-medium">환산금액</Text>
-                      <Text className="text-xl font-medium">16,515원</Text>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <Text className="text-slate-600">평균적용환율</Text>
-                      <Text className="text-slate-600">1376.29</Text>
-                    </div>
-
-                    <div className="border my-3"></div>
-
-                    <div className="flex justify-between">
-                      <Text className="text-xl font-medium">지금 팔면</Text>
-                      <Text className="text-xl font-medium">16,093원</Text>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <Text className="text-slate-600">예상적용환율</Text>
-                      <Text className="text-slate-600">1341.13</Text>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <Text>예상수익금</Text>
-                      <Text>-442원</Text>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <Text>예상수익률</Text>
-                      <Text>-2.55%</Text>
-                    </div>
+                    
+                    
                   </div>
                 </div>
               </TabPanel>
             </TabPanels>
           </Tabs>
-
-          <Modal isOpen={isOpen} onClose={onClose} isCentered>
-            <ModalOverlay />
-            <ModalContent >
-              {/* <ModalHeader>Modal Title</ModalHeader> */}
-              <div className="flex justify-center">
-                <Text className="py-4 font-semibold text-xl mb-2">
-                  내 외화자산
-                </Text>
-              </div>
-              <ModalCloseButton />
-              <ModalBody >
-                <Example accountsData={accountsData} />
-              </ModalBody>
-
-              <ModalFooter>
-                <Button
-                  colorScheme="gray"
-                  mr={3}
-                  onClick={onClose}
-                >
-                  닫기
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
         </div>
       </div>
     </div>
