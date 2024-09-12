@@ -34,7 +34,7 @@ const ChartCard = ({
     <div
       name="card-container"
       className="w-[250px] h-[350px] px-8 py-4 bg-slate-50 rounded-2xl"
-      style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)"}}
+      style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}
     >
       {console.log(increase >= 0 ? "#FF0000" : "#524CFF")}
       {/* card 상단 */}

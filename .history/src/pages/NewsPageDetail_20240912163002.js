@@ -135,7 +135,7 @@ const NewsPageDetail = () => {
       >
         <Image
           src={consumData.imageUrl}
-          className="w-[750px] h-[300px] object-contain bg-slate-100 rounded-xl"
+          className="w-[750px] h-[300px] object-contain bg-white rounded-xl"
         ></Image>
         <div className="my-6">
           {fulltext === true

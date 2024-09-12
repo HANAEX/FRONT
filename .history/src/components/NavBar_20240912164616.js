@@ -100,9 +100,8 @@ const NavBar = () => {
           {user ? (
             // 로그인 상태일 때 사용자 정보와 아이콘 표시
             <div className="flex items-center gap-2">
-              <Text className='bg-red-200 text-red-600 px-1 rounded-sm'>LV{user.user_lv}</Text>
               <Text fontSize="md" fontWeight="bold">
-                {user.user_name}님
+                {user.user_lv} {user.user_name}님
               </Text>
               <Link to={"/My"}>
                 {/* 로그인 상태일 때 아이콘을 변경하고 색을 green으로 설정 */}

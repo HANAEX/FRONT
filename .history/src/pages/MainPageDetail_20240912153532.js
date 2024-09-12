@@ -25,7 +25,7 @@ import MainDropDown from "../components/DropDownMenu/MainDropDown";
 import BuySell from "../components/MainPageDetail/BuySell";
 import { IoReload } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import '../css/style.css';
+import './css/style.css';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -369,7 +369,7 @@ const MainPageDetail = () => {
   return (
     <div className="w-[960px] flex flex-col py-1 px-10">
       {/* 살 때 팔 때 */}
-      <div className="w-full px-48 py-2 rounded-lg my-2 bg-white" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
+      <div className="w-full px-48 py-2 rounded-lg my-2 bg-white light-shadow">
         <div className="flex justify-center items-center my-3">
           <MainDropDown
             changeState={changeState}
@@ -386,7 +386,7 @@ const MainPageDetail = () => {
           currentSellPrice={currentSellPrice}
         />
       </div>
-      <div className="flex flex-col items-center bg-white rounded-lg py-5" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
+      <div className="flex flex-col items-center bg-white rounded-lg py-5 drop-shadow-2xl">
         <div className="flex justify-end w-full px-16 mt-2 gap-2">
           <div className="flex gap-1">
             <Text className="text-slate-500">고시회차 458</Text>
@@ -419,7 +419,7 @@ const MainPageDetail = () => {
         </div>
       </div>
       {/* 구매 버튼 판매 버튼 */}
-      <div className="flex justify-center py-2 bg-white gap-6 my-2 rounded-lg" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
+      <div className="flex justify-center py-2 bg-white gap-6 my-2 rounded-lg drop-shadow-2xl">
         <button
           onClick={onOpen}
           className="text-white bt-background px-4 py-2 rounded hover:bg-white hover:border hover:border-[#009577] hover:text-[#009577] transition-all"

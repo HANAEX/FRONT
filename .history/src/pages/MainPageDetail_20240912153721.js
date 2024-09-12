@@ -386,7 +386,7 @@ const MainPageDetail = () => {
           currentSellPrice={currentSellPrice}
         />
       </div>
-      <div className="flex flex-col items-center bg-white rounded-lg py-5" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
+      <div className="flex flex-col items-center bg-white rounded-lg py-5 light-shadow">
         <div className="flex justify-end w-full px-16 mt-2 gap-2">
           <div className="flex gap-1">
             <Text className="text-slate-500">고시회차 458</Text>

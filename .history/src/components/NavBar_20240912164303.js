@@ -1,11 +1,17 @@
+// import React, {useEffect} from "react";
 // import Menu from "./Menu";
-// import { IoPersonCircleOutline } from "react-icons/io5";
-// import { Box, Image, Text } from "@chakra-ui/react";
+// import { IoPersonCircle, IoPersonCircleOutline } from "react-icons/io5";
+// import { Box, Image, Text, Divider } from "@chakra-ui/react";
 // import { useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
-// import { IoPersonCircleSharp } from "react-icons/io5";
+
 // const NavBar = () => {
-//   const user = useSelector((state) => state.user.user);  // user 정보를 가져옴
+//   const user = useSelector((state) => state.user);
+//   useEffect(() => {
+//     if (user) {
+
+//     }
+//   }, [user]);
 
 //   return (
 //     <nav className="w-[1140px] h-[55px] px-10 bg-background">
@@ -33,24 +39,14 @@
 //             <Menu menu_name="게시판" />
 //           </Link>
 //         </div>
-
 //         <div>
-//           {user ? (
-//             // 로그인 상태일 때 표시
-//             <div className="flex items-center gap-2">
-//               <Text fontSize="md" fontWeight="bold">
-//                 LV {user.user_lv} {user.user_name}님
-//               </Text>
-//               <Link to={"/My"}>
-//                 <IoPersonCircleOutline className="w-8 h-8" />
-//               </Link>
-//             </div>
-//           ) : (
-//             // 로그인하지 않았을 때 로그인 버튼 표시
-//             <Link to={"/Login"}>
-//               <IoPersonCircleOutline className="w-8 h-8" />
-//             </Link>
-//           )}
+//           <div>
+//             <Text>{user.user_lv}</Text>
+//             <Text>{user.user_name}</Text>
+//           </div>
+//           <Link to={"/Login"}>
+//             <IoPersonCircleOutline className="w-8 h-8" />
+//           </Link>
 //         </div>
 //       </div>
 //       <div className="border"></div>
@@ -58,10 +54,9 @@
 //   );
 // };
 
-// export default NavBar;
-import React from "react";
+// export default NavBar;import React from "react";
 import Menu from "./Menu";
-import { IoPersonCircleOutline, IoPersonCircleSharp } from "react-icons/io5";  // IoPersonCircleSharp 추가
+import { IoPersonCircleOutline } from "react-icons/io5";
 import { Box, Image, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -98,19 +93,17 @@ const NavBar = () => {
 
         <div>
           {user ? (
-            // 로그인 상태일 때 사용자 정보와 아이콘 표시
+            // 로그인 상태일 때 표시
             <div className="flex items-center gap-2">
-              <Text className='bg-red-200 text-red-600 px-1 rounded-sm'>LV{user.user_lv}</Text>
               <Text fontSize="md" fontWeight="bold">
-                {user.user_name}님
+                {user.user_lv} {user.user_name}님
               </Text>
               <Link to={"/My"}>
-                {/* 로그인 상태일 때 아이콘을 변경하고 색을 green으로 설정 */}
-                <IoPersonCircleSharp className="w-8 h-8" color="green" />
+                <IoPersonCircleOutline className="w-8 h-8" />
               </Link>
             </div>
           ) : (
-            // 로그인하지 않았을 때 기본 로그인 아이콘 표시
+            // 로그인하지 않았을 때 로그인 버튼 표시
             <Link to={"/Login"}>
               <IoPersonCircleOutline className="w-8 h-8" />
             </Link>

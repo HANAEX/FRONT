@@ -131,11 +131,11 @@ const NewsPageDetail = () => {
       <div
         name="content-box"
         className="flex flex-col items-center rounded-2xl px-10 py-4 bg-white"
-        style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}
+        style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)"}}
       >
         <Image
           src={consumData.imageUrl}
-          className="w-[750px] h-[300px] object-contain bg-slate-100 rounded-xl"
+          className="w-[750px] h-[300px] object-contain bg-white rounded-xl"
         ></Image>
         <div className="my-6">
           {fulltext === true
