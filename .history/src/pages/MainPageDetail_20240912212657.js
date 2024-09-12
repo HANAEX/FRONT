@@ -445,13 +445,13 @@ const MainPageDetail = () => {
         {isFixed && (
           <div
             name="fake-section"
-            className="bg-slate-50 px-5 py-5 flex-none w-[145px]"
+            className="bg-slate-50 px-5 py-5 flex-none w-[140px]"
           ></div>
         )}
         {/* left section */}
         <div
           name="left-section"
-          className={`bg-slate-50 px-5 py-5 flex-none w-[145px] ${
+          className={`bg-slate-50 px-5 py-5 flex-none w-[140px] ${
             isFixed ? "fixed top-0 z-10" : ""
           }`}
           style={{ top: isFixed ? "10px" : "auto" }}

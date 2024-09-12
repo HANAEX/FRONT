@@ -445,19 +445,19 @@ const MainPageDetail = () => {
         {isFixed && (
           <div
             name="fake-section"
-            className="bg-slate-50 px-5 py-5 flex-none w-[145px]"
+            className="bg-slate-50 px-5 py-5 flex-none w-44"
           ></div>
         )}
         {/* left section */}
         <div
           name="left-section"
-          className={`bg-slate-50 px-5 py-5 flex-none w-[145px] ${
+          className={`bg-slate-50 px-5 py-5 flex-none w-44 ${
             isFixed ? "fixed top-0 z-10" : ""
           }`}
           style={{ top: isFixed ? "10px" : "auto" }}
         >
           <div className="flex items-center mb-3">
-            <Text className="mr-1 font-semibold">USD/KRW</Text>
+            <Text className="text-lg mr-1 font-semibold">USD/KRW</Text>
             <Image boxSize={"20px"} src="/image/usd_flag.png"></Image>
           </div>
 

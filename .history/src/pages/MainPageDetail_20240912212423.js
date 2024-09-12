@@ -445,19 +445,19 @@ const MainPageDetail = () => {
         {isFixed && (
           <div
             name="fake-section"
-            className="bg-slate-50 px-5 py-5 flex-none w-[145px]"
+            className="bg-slate-50 px-5 py-5 flex-none w-44"
           ></div>
         )}
         {/* left section */}
         <div
           name="left-section"
-          className={`bg-slate-50 px-5 py-5 flex-none w-[145px] ${
+          className={`bg-slate-50 px-5 py-5 flex-none w-44 ${
             isFixed ? "fixed top-0 z-10" : ""
           }`}
           style={{ top: isFixed ? "10px" : "auto" }}
         >
           <div className="flex items-center mb-3">
-            <Text className="mr-1 font-semibold">USD/KRW</Text>
+            <Text className="text-lg mr-1 font-semibold">USD/KRW</Text>
             <Image boxSize={"20px"} src="/image/usd_flag.png"></Image>
           </div>
 
@@ -475,7 +475,7 @@ const MainPageDetail = () => {
           />
         </div>
         <div name="right-section" className="bg-slate-50 p-5 flex-1">
-          <div name="1-1" className="bg-slate-400 h-[400px] mt-6 py-3">
+          <div name="1-1" className="bg-slate-400 h-[400px] mt-6 px-6 py-3">
             <Text className="text-xl font-semibold leading-0">
               추천포인트 3가지
             </Text>
@@ -486,7 +486,7 @@ const MainPageDetail = () => {
               <PointBox />
             </div>
           </div>
-          <div name="1-2" className="bg-slate-400 h-80 mt-6 py-3">
+          <div name="1-2" className="bg-slate-400 h-80 mt-6 px-6 py-3">
             <Text className="text-xl font-semibold leading-0">
               주식추전 TOP 3
             </Text>

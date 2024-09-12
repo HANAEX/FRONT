@@ -25,8 +25,8 @@ import MainDropDown from "../components/DropDownMenu/MainDropDown";
 import BuySell from "../components/MainPageDetail/BuySell";
 import { IoReload } from "react-icons/io5";
 import { useSelector } from "react-redux";
-import "../css/style.css";
-import PointBox from "../components/PointBox";
+import '../css/style.css';
+import PointBox from '../components/PointBox';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -203,11 +203,11 @@ const MainPageDetail = () => {
   // const handleReservedCardClick = (index) => {
   //   const selectedTransaction = transactionHistory[index];
   //   setSelectedTransaction({ ...selectedTransaction, index });
-
+  
   //   // 선택된 거래 정보를 이용하여 외화 구매 금액과 거래 금액을 설정
   //   setExchangeValue(selectedTransaction.deposit_amount); // 예: 입금 금액을 exchangeValue로 설정
   //   setCurrentInvestPrice(selectedTransaction.withdrawal_amount); // 예: 출금 금액을 currentInvestPrice로 설정
-
+  
   //   setModalType("ReservedModal");  // ReservedModal로 설정
   //   onOpen(); // 모달 열기
   // };
@@ -218,6 +218,8 @@ const MainPageDetail = () => {
     setModalType("ReservedModal");
     onOpen();
   };
+
+  
 
   // vers three
   const handlePurchaseClick = () => {
@@ -326,9 +328,9 @@ const MainPageDetail = () => {
     // reservation_period가 null이면 빈 문자열로 처리
     const transactionToUpdate = {
       ...updatedTransaction,
-      reservation_period: updatedTransaction.reservation_period || "", // null 처리
+      reservation_period: updatedTransaction.reservation_period || "",  // null 처리
     };
-
+  
     axios
       .put("http://localhost:8082/api/updateTransaction", transactionToUpdate)
       .then((response) => {
@@ -337,9 +339,10 @@ const MainPageDetail = () => {
       .catch((error) => {
         console.error("Error updating transaction:", error);
       });
-
+  
     onClose();
   };
+  
 
   // Modal type 변경
   const handleSelectClick = () => {
@@ -367,10 +370,7 @@ const MainPageDetail = () => {
   return (
     <div className="w-[960px] flex flex-col py-1 px-10">
       {/* 살 때 팔 때 */}
-      <div
-        className="w-full px-48 py-2 rounded-lg my-2 bg-white"
-        style={{ boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)" }}
-      >
+      <div className="w-full px-48 py-2 rounded-lg my-2 bg-white" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
         <div className="flex justify-center items-center my-3">
           <MainDropDown
             changeState={changeState}
@@ -387,10 +387,7 @@ const MainPageDetail = () => {
           currentSellPrice={currentSellPrice}
         />
       </div>
-      <div
-        className="flex flex-col items-center bg-white rounded-lg py-5"
-        style={{ boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)" }}
-      >
+      <div className="flex flex-col items-center bg-white rounded-lg py-5" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
         <div className="flex justify-end w-full px-16 mt-2 gap-2">
           <div className="flex gap-1">
             <Text className="text-slate-500">고시회차 458</Text>
@@ -423,10 +420,7 @@ const MainPageDetail = () => {
         </div>
       </div>
       {/* 구매 버튼 판매 버튼 */}
-      <div
-        className="flex justify-center py-2 bg-white gap-6 my-2 rounded-lg"
-        style={{ boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)" }}
-      >
+      <div className="flex justify-center py-2 bg-white gap-6 my-2 rounded-lg" style={{boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)"}}>
         <button
           onClick={onOpen}
           className="text-white bt-background px-4 py-2 rounded hover:bg-white hover:border hover:border-[#009577] hover:text-[#009577] transition-all"
@@ -436,29 +430,27 @@ const MainPageDetail = () => {
         </button>
         <SelectButton onOpen={onOpen} handleSelectClick={handleSelectClick} />
       </div>
-
       <div
         name="recommand-section"
-        className="px-3 py-5 flex bg-slate-300 mt-1"
+        className="px-3 py-5 flex bg-slate-300 mt-1 gap-5"
         style={{ overflow: "visible" }}
       >
         {isFixed && (
           <div
             name="fake-section"
-            className="bg-slate-50 px-5 py-5 flex-none w-[145px]"
+            className="bg-slate-50 px-5 py-5 flex-none w-56"
           ></div>
         )}
-        {/* left section */}
         <div
           name="left-section"
-          className={`bg-slate-50 px-5 py-5 flex-none w-[145px] ${
+          className={`bg-slate-50 px-5 py-5 flex-none w-56 ${
             isFixed ? "fixed top-0 z-10" : ""
           }`}
           style={{ top: isFixed ? "10px" : "auto" }}
         >
           <div className="flex items-center mb-3">
-            <Text className="mr-1 font-semibold">USD/KRW</Text>
-            <Image boxSize={"20px"} src="/image/usd_flag.png"></Image>
+            <Text className="text-2xl mr-2">USD/KRW</Text>
+            <Image boxSize={"32px"} src="/image/usd_flag.png"></Image>
           </div>
 
           <MainRecommandButton
@@ -475,18 +467,19 @@ const MainPageDetail = () => {
           />
         </div>
         <div name="right-section" className="bg-slate-50 p-5 flex-1">
-          <div name="1-1" className="bg-slate-400 h-[400px] mt-6 py-3">
+          <div name="1-1" className="bg-slate-400 h-80 mt-6">
             <Text className="text-xl font-semibold leading-0">
-              추천포인트 3가지
+              주식추전 TOP 3
             </Text>
             <Divider className="my-3" orientation="horizontal" />
             <div className="flex justify-around">
               <PointBox />
               <PointBox />
               <PointBox />
-            </div>
+              
+              </div>
           </div>
-          <div name="1-2" className="bg-slate-400 h-80 mt-6 py-3">
+          <div name="1-2" className="bg-slate-400 h-80 mt-6 px-6 py-3">
             <Text className="text-xl font-semibold leading-0">
               주식추전 TOP 3
             </Text>
@@ -495,6 +488,7 @@ const MainPageDetail = () => {
               <StockBox />
               <StockBox />
               <StockBox />
+              
             </div>
           </div>
           <div name="1-3" className="bg-slate-400 h-80 mt-6 px-6 py-3">

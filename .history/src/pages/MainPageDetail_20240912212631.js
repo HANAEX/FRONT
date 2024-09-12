@@ -457,7 +457,7 @@ const MainPageDetail = () => {
           style={{ top: isFixed ? "10px" : "auto" }}
         >
           <div className="flex items-center mb-3">
-            <Text className="mr-1 font-semibold">USD/KRW</Text>
+            <Text className="text-lg mr-1 font-semibold">USD/KRW</Text>
             <Image boxSize={"20px"} src="/image/usd_flag.png"></Image>
           </div>
 
