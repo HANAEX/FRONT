@@ -125,7 +125,7 @@ const ChartCard = ({
         </Text>
       </div>
       <Link
-        to={"/MainPageDetail/"+name }
+        to={"/MainPageDetail/"+tempName }
         className="text-sm font-bold flex justify-end text-slate-500 py-2"
       >
         자세한 분석 보러가기

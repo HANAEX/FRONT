@@ -17,7 +17,7 @@ const FlowText = () => {
   ];
 
   return (
-    <Container className='rounded-full mt-10'>
+    <Container className='rounded-full mt-4'>
       <TextFlow>
         {stockItems.map((item, index) => (
           <StockItem key={index}>
