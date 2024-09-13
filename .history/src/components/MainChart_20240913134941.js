@@ -32,6 +32,8 @@ const MainChart = ({ id, changeState }) => {
 
       setConsumData(filteredConsumData);
       setTodayData(filteredTodayData);
+
+      console.log(todayData)
     } catch (error) {
       console.log(error);
     }
@@ -45,7 +47,7 @@ const MainChart = ({ id, changeState }) => {
     // 1분(60,000밀리초)마다 데이터를 다시 받아오는 타이머 설정
     const interval = setInterval(() => {
       getUseHistory();
-    }, 600000); // 1분마다 실행
+    }, 6000000); // 1분마다 실행
 
     // 컴포넌트 언마운트 시 타이머 정리
     return () => clearInterval(interval);
@@ -68,10 +70,10 @@ const MainChart = ({ id, changeState }) => {
         return consumData;
     }
   };
-
+  console.log(changeState)
   const filtered_rangeData = filterData(timeRange);
   const yAxisDomain = changeState === "JPY" ? [880, 1000] : [1300, 1400];
-  console.log("today", todayData)
+
   return (
     <div>
       <div>

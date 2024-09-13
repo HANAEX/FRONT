@@ -71,7 +71,7 @@ const MainChart = ({ id, changeState }) => {
 
   const filtered_rangeData = filterData(timeRange);
   const yAxisDomain = changeState === "JPY" ? [880, 1000] : [1300, 1400];
-  console.log("today", todayData)
+  console.log(todayData)
   return (
     <div>
       <div>

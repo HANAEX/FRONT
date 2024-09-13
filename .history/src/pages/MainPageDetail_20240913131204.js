@@ -86,7 +86,7 @@ const MainPageDetail = () => {
           `http://localhost:8081/api/mainpage/detail?state=${id}`
         );
 
-        console.log("result data : ",result.data)
+        console.log(result.data)
         const filteredData = result.data.todayData.filter(
           (item) => item.state === changeState
         );

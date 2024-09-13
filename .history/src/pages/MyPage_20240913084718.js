@@ -185,7 +185,7 @@ const MyPage = () => {
                   </Text>
                   <div className="flex items-end my-2">
                     <Text className="leading-0 text-2xl mr-1">USD</Text>
-                    <Text className="font-bold leading-0 text-3xl">{formatNumber(accountsData[1].usd)}</Text>
+                    <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
                   <div
                     className="bg-white w-full rounded-2xl px-8 py-6 mt-4"

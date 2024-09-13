@@ -185,7 +185,7 @@ const MyPage = () => {
                   </Text>
                   <div className="flex items-end my-2">
                     <Text className="leading-0 text-2xl mr-1">USD</Text>
-                    <Text className="font-bold leading-0 text-3xl">{formatNumber(accountsData[1].usd)}</Text>
+                    <Text className="font-bold leading-0 text-3xl">12.00</Text>
                   </div>
                   <div
                     className="bg-white w-full rounded-2xl px-8 py-6 mt-4"
@@ -230,7 +230,7 @@ const MyPage = () => {
                           src="/image/usd_flag.png"
                         ></Image>
                         <Text className="text-2xl font-bold">USD</Text>
-                        <Text className="text-2xl font-bold">{formatNumber(accountsData[1].usd)}</Text>
+                        <Text className="text-2xl font-bold">12</Text>
                       </div>
                     </div>
 
@@ -246,7 +246,7 @@ const MyPage = () => {
                           src="/image/usd_flag.png"
                         ></Image>
                         <Text className="text-xl font-medium">USD</Text>
-                        <Text className="text-xl font-medium">{formatNumber(accountsData[1].usd)}</Text>
+                        <Text className="text-xl font-medium">12</Text>
                       </div>
                     </div>
 
