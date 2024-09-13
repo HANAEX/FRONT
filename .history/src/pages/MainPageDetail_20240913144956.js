@@ -743,7 +743,7 @@ const MainPageDetail = () => {
     // 1분마다 데이터 갱신
     const interval = setInterval(() => {
       getUseHistory();
-    }, 6000); // 60,000밀리초 = 1분
+    }, 60000); // 60,000밀리초 = 1분
 
     // 컴포넌트 언마운트 시 타이머 정리
     return () => clearInterval(interval);

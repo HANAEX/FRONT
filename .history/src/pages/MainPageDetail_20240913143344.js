@@ -712,26 +712,18 @@ const MainPageDetail = () => {
           setWonValue(remit_send);
           setVendWonValue(remit_receive);
         }
-        // console.log("MainPageDetail.js", filteredData);
-        
-         // 오늘 날짜를 가져옵니다.
-        const todayDate = new Date().toISOString().split('T')[0];
+        console.log(filteredData);
 
         // MainChart에 전달할 데이터 설정
         const filteredConsumData = result.data.data.filter(
           (item) => item.state === changeState
         );
         const filteredTodayData = result.data.todayData.filter(
-          (item) =>
-            item.state === changeState &&
-            item.date === todayDate // 날짜 조건 추가
+          (item) => item.state === changeState
         );
-
 
         setConsumData(filteredConsumData);
         setTodayData(filteredTodayData);
-
-        console.log(filteredTodayData);
       } catch (error) {
         console.log(error);
       } finally {
@@ -743,7 +735,7 @@ const MainPageDetail = () => {
     // 1분마다 데이터 갱신
     const interval = setInterval(() => {
       getUseHistory();
-    }, 6000); // 60,000밀리초 = 1분
+    }, 60000); // 60,000밀리초 = 1분
 
     // 컴포넌트 언마운트 시 타이머 정리
     return () => clearInterval(interval);
@@ -1021,10 +1013,10 @@ const MainPageDetail = () => {
       >
         <div className="flex justify-end w-full px-16 mt-2 gap-2">
           <div className="flex gap-1">
-            <Text className="text-slate-500">고시회차 {todayData[0].period}</Text>
+            <Text className="text-slate-500">고시회차 458</Text>
           </div>
           <div className="flex items-center gap-1">
-            <Text className="text-slate-500">{todayData[0].time}</Text>
+            <Text className="text-slate-500">20:51:49</Text>
             <IoReload className="text-slate-500" />
           </div>
         </div>
