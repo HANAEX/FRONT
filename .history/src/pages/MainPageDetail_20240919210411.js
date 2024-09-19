@@ -28,8 +28,6 @@ import PointBox from "../components/PointBox";
 import { investPointMapper } from "../data/investPointMapper";
 import ReportViewer from "../components/ReportViewer";
 import LevelPopover from "../components/LevelPopover";
-import FinanceReportTable from '../components/FinanceReportTable';
-import FinanceReportSummary from '../components/FinanceReportSummary';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -569,7 +567,7 @@ const MainPageDetail = () => {
             <ReportViewer />
           </div>
           <div name="1-3" 
-            className="rounded-xl h-[500px] mt-2 py-5 px-2"
+            className="rounded-xl h-[400px] mt-2 py-5 px-2"
             style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
           >
             <Text className="text-xl font-semibold leading-0 px-5">
@@ -581,9 +579,74 @@ const MainPageDetail = () => {
               <Text className='mx-4 text-sm'>국내외 물가지표 및 글로벌 경제의 점진적 둔화에 따른 달러 약세 영향 속 금리와 환율은 점차 하락하는 모습을 보일 것으로 전망</Text>
             </div>
             
-            <FinanceReportTable />
-            <FinanceReportSummary />
+            <div className="overflow-x-auto mx-4 mt-4">
+              <table className="table-auto w-full border border-gray-300 text-center">
+                <thead className="bg-gray-100">
+                  <tr>
+                    <th className="border border-gray-300 px-4 py-2">항목</th>
+                    <th className="border border-gray-300 px-4 py-2">2022년</th>
+                    <th className="border border-gray-300 px-4 py-2">
+                      2023년 상반기
+                    </th>
+                    <th className="border border-gray-300 px-4 py-2">
+                      2023년 하반기
+                    </th>
+                    <th className="border border-gray-300 px-4 py-2">
+                      2024년 연간
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-4 py-2">
+                      금리 (국고채 3년, %)
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">3.18</td>
+                    <td className="border border-gray-300 px-4 py-2">3.42</td>
+                    <td className="border border-gray-300 px-4 py-2">3.81</td>
+                    <td className="border border-gray-300 px-4 py-2">3.51</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-4 py-2">
+                      달러/원 환율 (평균, 원)
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">1,292</td>
+                    <td className="border border-gray-300 px-4 py-2">1,296</td>
+                    <td className="border border-gray-300 px-4 py-2">1,315</td>
+                    <td className="border border-gray-300 px-4 py-2">1,275</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-4 py-2">
+                      GDP (%)
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">2.6</td>
+                    <td className="border border-gray-300 px-4 py-2">0.9</td>
+                    <td className="border border-gray-300 px-4 py-2">1.6</td>
+                    <td className="border border-gray-300 px-4 py-2">2.0</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-4 py-2">
+                      소비자물가 (% 전년대비)
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">5.1</td>
+                    <td className="border border-gray-300 px-4 py-2">4.0</td>
+                    <td className="border border-gray-300 px-4 py-2">3.3</td>
+                    <td className="border border-gray-300 px-4 py-2">2.6</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-300 px-4 py-2">
+                      경상수지 (억달러)
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">298</td>
+                    <td className="border border-gray-300 px-4 py-2">24</td>
+                    <td className="border border-gray-300 px-4 py-2">236</td>
+                    <td className="border border-gray-300 px-4 py-2">450</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+          <div name="1-4" className="bg-slate-400 h-80 mt-6 px-6 py-3"></div>
         </div>
       </div>
 

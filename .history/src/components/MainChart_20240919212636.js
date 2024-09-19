@@ -129,7 +129,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
               label={
                 <Label
                   value={`최고 ${maxPrice}원`}
-                  position="center"
+                  position="top"
                   fill="red"
                   fontSize={14}
                 />

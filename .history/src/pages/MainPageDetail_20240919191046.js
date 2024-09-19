@@ -6,6 +6,15 @@ import {
   useDisclosure,
   Image,
   Divider,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  Portal,
 } from "@chakra-ui/react";
 
 import MainRecommandButton from "../components/MainRecommandButton";
@@ -27,9 +36,8 @@ import "../css/style.css";
 import PointBox from "../components/PointBox";
 import { investPointMapper } from "../data/investPointMapper";
 import ReportViewer from "../components/ReportViewer";
-import LevelPopover from "../components/LevelPopover";
-import FinanceReportTable from '../components/FinanceReportTable';
-import FinanceReportSummary from '../components/FinanceReportSummary';
+
+import { RiQuestionFill } from "react-icons/ri";
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -420,7 +428,74 @@ const MainPageDetail = () => {
             Lv3 우대 80%
           </Text>
           {/* Popover 관련 아이콘 및 트리거 */}
-          <LevelPopover />
+          <Popover>
+            <PopoverTrigger>
+              <span>
+                <RiQuestionFill size={32} />
+              </span>
+            </PopoverTrigger>
+            <Portal>
+              <PopoverContent>
+                <PopoverArrow />
+                <PopoverHeader>우대 정보</PopoverHeader>
+                <PopoverCloseButton />
+                <PopoverBody>
+                  <table style={{ borderCollapse: "collapse", width: "100%" }}>
+                    <thead>
+                      <tr
+                        style={{
+                          borderBottom: "1px solid #ddd",
+                          textAlign: "center",
+                        }}
+                      >
+                        <th style={{ padding: "2px" }}>레벨</th>
+                        <th style={{ padding: "2px" }}>스코어</th>
+                        <th style={{ padding: "2px" }}>환율 우대율</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ textAlign: "center" }}>
+                        <td style={{ padding: "2px" }}>5</td>
+                        <td style={{ padding: "2px" }}>25001 이상</td>
+                        <td style={{ padding: "2px" }}>
+                          USD: 90% / JPY, EUR: 60% / 기타: 30%
+                        </td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td style={{ padding: "2px" }}>4</td>
+                        <td style={{ padding: "2px" }}>15001 ~ 25000</td>
+                        <td style={{ padding: "2px" }}>
+                          USD: 85% / JPY, EUR: 55% / 기타: 30%
+                        </td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td style={{ padding: "2px" }}>3</td>
+                        <td style={{ padding: "2px" }}>10001 ~ 15000</td>
+                        <td style={{ padding: "2px" }}>
+                          USD: 80% / JPY, EUR: 50% / 기타: 20%
+                        </td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td style={{ padding: "2px" }}>2</td>
+                        <td style={{ padding: "2px" }}>5101 ~ 10000</td>
+                        <td style={{ padding: "2px" }}>
+                          USD: 75% / JPY, EUR: 45% / 기타: 20%
+                        </td>
+                      </tr>
+                      <tr style={{ textAlign: "center" }}>
+                        <td style={{ padding: "2px" }}>1</td>
+                        <td style={{ padding: "1px" }}>0 ~ 5100</td>
+                        <td style={{ padding: "1px" }}>
+                          USD: 70% / JPY, EUR: 40% / 기타: 20%
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </PopoverBody>
+                <PopoverFooter>추가적인 세부 내용</PopoverFooter>
+              </PopoverContent>
+            </Portal>
+          </Popover>
         </div>
 
         <BuySell
@@ -523,11 +598,11 @@ const MainPageDetail = () => {
             scrollToSection={() => scrollToSection("1-1")}
           />
           <MainRecommandButton
-            text={"외환리포트"}
+            text={"추천주식"}
             scrollToSection={() => scrollToSection("1-2")}
           />
           <MainRecommandButton
-            text={"금융시장전망"}
+            text={"추천상품"}
             scrollToSection={() => scrollToSection("1-3")}
           />
         </div>
@@ -568,22 +643,14 @@ const MainPageDetail = () => {
             <div className="border border-slate-300 mx-4 mt-4"></div>
             <ReportViewer />
           </div>
-          <div name="1-3" 
-            className="rounded-xl h-[500px] mt-2 py-5 px-2"
-            style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
-          >
-            <Text className="text-xl font-semibold leading-0 px-5">
-              금융시장전망
-            </Text>
-            <div className="border border-slate-300 mx-4 mt-4"></div>
-            <div className='mt-2'>
-              <Text className='mx-4 text-sm'>24년 들어, 인플레이션 지속적으로 둔회되는 가운데 고금리 장기화 여파 속 4분기 시점 美 냉각 가시화 될 것으로 예상</Text>
-              <Text className='mx-4 text-sm'>국내외 물가지표 및 글로벌 경제의 점진적 둔화에 따른 달러 약세 영향 속 금리와 환율은 점차 하락하는 모습을 보일 것으로 전망</Text>
-            </div>
-            
-            <FinanceReportTable />
-            <FinanceReportSummary />
+          <div name="1-3" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+            <Text className="text-xl font-semibold leading-0">상품추천</Text>
+            <Divider className="my-3" orientation="horizontal" />
+            <Account />
+            <Account />
+            <Account />
           </div>
+          <div name="1-4" className="bg-slate-400 h-80 mt-6 px-6 py-3"></div>
         </div>
       </div>
 

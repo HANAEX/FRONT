@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   ReferenceLine,
   Label,
-  Dot
 } from "recharts";
 import { ButtonGroup } from "@chakra-ui/react";
 
@@ -89,18 +88,6 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
     }
   };
 
-  // 최신 데이터에 dot을 표시하는 함수
-  const renderDot = (data) => {
-    const latestData = data[data.length - 1]; // 최신 데이터 가져오기
-    return (
-      <Dot
-        cx={latestData.cx}
-        cy={latestData.cy}
-        r={6}
-        fill="#b6e9e5" // dot 색상 설정
-      />
-    );
-  };
   return (
     <div>
       <div>
@@ -174,10 +161,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
             <Area
               type="monotone"
               dataKey="exchange_rate"
-              stroke="#32B3B7"
-              fill="none"
-              dot={renderDot(todayData)}
-              strokeWidth={3}
+              stroke="#b6e9e5"
             />
           ) : (
             <>

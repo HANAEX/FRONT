@@ -29,7 +29,6 @@ import { investPointMapper } from "../data/investPointMapper";
 import ReportViewer from "../components/ReportViewer";
 import LevelPopover from "../components/LevelPopover";
 import FinanceReportTable from '../components/FinanceReportTable';
-import FinanceReportSummary from '../components/FinanceReportSummary';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -569,7 +568,7 @@ const MainPageDetail = () => {
             <ReportViewer />
           </div>
           <div name="1-3" 
-            className="rounded-xl h-[500px] mt-2 py-5 px-2"
+            className="rounded-xl h-[400px] mt-2 py-5 px-2"
             style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
           >
             <Text className="text-xl font-semibold leading-0 px-5">
@@ -582,7 +581,6 @@ const MainPageDetail = () => {
             </div>
             
             <FinanceReportTable />
-            <FinanceReportSummary />
           </div>
         </div>
       </div>

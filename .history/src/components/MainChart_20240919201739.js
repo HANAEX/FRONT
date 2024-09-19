@@ -96,8 +96,8 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
       <Dot
         cx={latestData.cx}
         cy={latestData.cy}
-        r={6}
-        fill="#b6e9e5" // dot 색상 설정
+        r={5}
+        fill="red" // dot 색상 설정
       />
     );
   };
@@ -174,10 +174,9 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
             <Area
               type="monotone"
               dataKey="exchange_rate"
-              stroke="#32B3B7"
-              fill="none"
+              stroke="#b6e9e5"
+              fill="#b6e9e5"
               dot={renderDot(todayData)}
-              strokeWidth={3}
             />
           ) : (
             <>

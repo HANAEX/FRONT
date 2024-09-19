@@ -135,7 +135,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
                 />
               }
               stroke="red"
-              strokeDasharray="5 5"
+              strokeDasharray="3 3"
             />
           )}
           {minPrice && (

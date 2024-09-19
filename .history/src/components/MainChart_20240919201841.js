@@ -97,7 +97,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
         cx={latestData.cx}
         cy={latestData.cy}
         r={6}
-        fill="#b6e9e5" // dot 색상 설정
+        fill="red" // dot 색상 설정
       />
     );
   };
@@ -177,7 +177,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
               stroke="#32B3B7"
               fill="none"
               dot={renderDot(todayData)}
-              strokeWidth={3}
+              strokeWidth={2}
             />
           ) : (
             <>

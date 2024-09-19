@@ -29,7 +29,6 @@ import { investPointMapper } from "../data/investPointMapper";
 import ReportViewer from "../components/ReportViewer";
 import LevelPopover from "../components/LevelPopover";
 import FinanceReportTable from '../components/FinanceReportTable';
-import FinanceReportSummary from '../components/FinanceReportSummary';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -582,7 +581,6 @@ const MainPageDetail = () => {
             </div>
             
             <FinanceReportTable />
-            <FinanceReportSummary />
           </div>
         </div>
       </div>

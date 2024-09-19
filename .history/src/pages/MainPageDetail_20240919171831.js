@@ -25,11 +25,8 @@ import { IoReload } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import "../css/style.css";
 import PointBox from "../components/PointBox";
-import { investPointMapper } from "../data/investPointMapper";
-import ReportViewer from "../components/ReportViewer";
-import LevelPopover from "../components/LevelPopover";
-import FinanceReportTable from '../components/FinanceReportTable';
-import FinanceReportSummary from '../components/FinanceReportSummary';
+import { investPointMapper } from '../data/investPointMapper';
+import ReportViewer from '../components/ReportViewer';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -39,7 +36,7 @@ const MainPageDetail = () => {
   const [isPriceLoading, setIsPriceLoading] = useState(false);
   const [showClander, setShowClander] = useState(false);
   const [changeState, setChangeState] = useState("USD");
-
+  
   // 원본가격
   const [originInvestPrice, setOriginInvestPrice] = useState(0);
   const [originSellPrice, setOriginSellPrice] = useState(0);
@@ -91,7 +88,7 @@ const MainPageDetail = () => {
   // console.log("id =", id);
   const location = useLocation();
   const { increase } = location.state || {};
-  console.log(increase);
+  console.log(increase)
   // axios로 데이터 가져오기
   useEffect(() => {
     const getUseHistory = async () => {
@@ -103,14 +100,16 @@ const MainPageDetail = () => {
         console.log("result data : ", result.data);
 
         // 오늘 날짜 가져오기
-        const todayDate = new Date().toISOString().split("T")[0];
+        const todayDate = new Date().toISOString().split('T')[0];
 
         // MainChart 데이터 필터링
         const filteredConsumData = result.data.data.filter(
           (item) => item.state === changeState
         );
         const filteredTodayData = result.data.todayData.filter(
-          (item) => item.state === changeState && item.date === todayDate // 날짜 조건 추가
+          (item) =>
+            item.state === changeState &&
+            item.date === todayDate // 날짜 조건 추가
         );
 
         setConsumData(filteredConsumData);
@@ -118,23 +117,16 @@ const MainPageDetail = () => {
 
         // 필터링된 오늘 데이터가 있을 경우 상태 업데이트
         if (filteredTodayData.length > 0) {
-          const { remit_send, remit_receive } =
-            filteredTodayData[filteredTodayData.length - 1];
+          const { remit_send, remit_receive } = filteredTodayData[filteredTodayData.length - 1];
           // setCurrentInvestPrice(remit_send);
-          //
-          setCurrentInvestPrice(
-            parseFloat((remit_send - remit_send * 0.008).toFixed(2))
-          );
-          setOriginInvestPrice(remit_send);
+          // 
+          setCurrentInvestPrice(parseFloat((remit_send - remit_send * 0.008).toFixed(2)));
+          setOriginInvestPrice(remit_send)
           // setCurrentSellPrice(remit_receive);
-          setCurrentSellPrice(
-            parseFloat((remit_receive + remit_receive * 0.008).toFixed(2))
-          );
-          setOriginSellPrice(remit_receive);
+          setCurrentSellPrice(parseFloat((remit_receive + remit_receive * 0.008).toFixed(2)));
+          setOriginSellPrice(remit_receive)
           setWonValue(parseFloat((remit_send - remit_send * 0.008).toFixed(2)));
-          setVendWonValue(
-            parseFloat((remit_receive + remit_receive * 0.008).toFixed(2))
-          );
+          setVendWonValue(parseFloat((remit_receive + remit_receive * 0.008).toFixed(2)));
         }
 
         console.log("filteredTodayData:", filteredTodayData);
@@ -261,9 +253,7 @@ const MainPageDetail = () => {
     let reservationPeriod = "";
 
     // 선택 상태에 따라 requestAmount 설정
-    const requestAmount = selected
-      ? parseFloat(wonValue)
-      : parseFloat(vendWonValue);
+    const requestAmount = selected ? parseFloat(wonValue) : parseFloat(vendWonValue);
 
     // 입력값 검증
     if (isNaN(requestAmount) || requestAmount <= 0) {
@@ -419,8 +409,6 @@ const MainPageDetail = () => {
           <Text className="text px-3 border-2 text-slate-600 border-green-500 rounded-full">
             Lv3 우대 80%
           </Text>
-          {/* Popover 관련 아이콘 및 트리거 */}
-          <LevelPopover />
         </div>
 
         <BuySell
@@ -523,67 +511,51 @@ const MainPageDetail = () => {
             scrollToSection={() => scrollToSection("1-1")}
           />
           <MainRecommandButton
-            text={"외환리포트"}
+            text={"추천주식"}
             scrollToSection={() => scrollToSection("1-2")}
           />
           <MainRecommandButton
-            text={"금융시장전망"}
+            text={"추천상품"}
             scrollToSection={() => scrollToSection("1-3")}
           />
         </div>
         {/* 오른쪽 섹션 */}
         <div name="right-section" className="bg-slate-50 flex-1">
-          <div
-            name="1-1"
-            className="h-[450px] rounded-xl mt-2 py-5 px-2"
-            style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
+          <div name="1-1" className="h-[450px] rounded-xl mt-2 py-5 px-2" 
+            style={
+            {boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)"}
+            }
           >
             <Text className="text-xl font-semibold leading-0 px-5">
               추천포인트 3가지
             </Text>
-            <div className="border border-slate-300 mx-4 mt-4"></div>
+            <div className='border border-slate-300 mx-4 mt-4'></div>
             <div className="flex justify-around mt-8">
-              <PointBox
-                title={investPointMapper[0].title}
-                content={investPointMapper[0].content}
-              />
-              <PointBox
-                title={investPointMapper[1].title}
-                content={investPointMapper[1].content}
-              />
-              <PointBox
-                title={investPointMapper[2].title}
-                content={investPointMapper[2].content}
-              />
+              <PointBox title={investPointMapper[0].title} content={investPointMapper[0].content}/>
+              <PointBox title={investPointMapper[1].title} content={investPointMapper[1].content}/>
+              <PointBox title={investPointMapper[2].title} content={investPointMapper[2].content}/>
             </div>
           </div>
-          <div
-            name="1-2"
-            className="h-[650px] rounded-xl mt-2 py-5 px-2"
-            style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
+          <div name="1-2" className="h-[650px] rounded-xl mt-2 py-5 px-2"
+            style={
+              {boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)"}
+            }
           >
             <Text className="text-xl font-semibold leading-0 px-5">
               외환리포트
             </Text>
-            <div className="border border-slate-300 mx-4 mt-4"></div>
+            <div className='border border-slate-300 mx-4 mt-4'></div>
             <ReportViewer />
+
           </div>
-          <div name="1-3" 
-            className="rounded-xl h-[500px] mt-2 py-5 px-2"
-            style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
-          >
-            <Text className="text-xl font-semibold leading-0 px-5">
-              금융시장전망
-            </Text>
-            <div className="border border-slate-300 mx-4 mt-4"></div>
-            <div className='mt-2'>
-              <Text className='mx-4 text-sm'>24년 들어, 인플레이션 지속적으로 둔회되는 가운데 고금리 장기화 여파 속 4분기 시점 美 냉각 가시화 될 것으로 예상</Text>
-              <Text className='mx-4 text-sm'>국내외 물가지표 및 글로벌 경제의 점진적 둔화에 따른 달러 약세 영향 속 금리와 환율은 점차 하락하는 모습을 보일 것으로 전망</Text>
-            </div>
-            
-            <FinanceReportTable />
-            <FinanceReportSummary />
+          <div name="1-3" className="bg-slate-400 h-80 mt-6 px-6 py-3">
+            <Text className="text-xl font-semibold leading-0">상품추천</Text>
+            <Divider className="my-3" orientation="horizontal" />
+            <Account />
+            <Account />
+            <Account />
           </div>
+          <div name="1-4" className="bg-slate-400 h-80 mt-6 px-6 py-3"></div>
         </div>
       </div>
 

@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   ReferenceLine,
   Label,
-  Dot
 } from "recharts";
 import { ButtonGroup } from "@chakra-ui/react";
 
@@ -51,18 +50,9 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
 
   const filteredData = filterData(timeRange);
 
-  // 최고가, 최저가, 평균가 계산 (todayData 기준)
+  // 최고가, 최저가, 평균가 계산
   useEffect(() => {
-    if (timeRange === "1D" && todayData.length > 0) {
-      const exchangeRates = todayData.map((data) => data.exchange_rate);
-      const max = Math.max(...exchangeRates);
-      const min = Math.min(...exchangeRates);
-      const avg = exchangeRates.reduce((acc, curr) => acc + curr, 0) / exchangeRates.length;
-
-      setMaxPrice(max.toFixed(2));
-      setMinPrice(min.toFixed(2));
-      setAvgPrice(avg.toFixed(2));
-    } else if (filteredData.length > 0) {
+    if (filteredData.length > 0) {
       const prices = filteredData.flatMap((data) => data.price.map(Number)); // 각 항목에서 price 배열의 값을 가져와 모두 병합
       const max = Math.max(...prices);
       const min = Math.min(...prices);
@@ -72,42 +62,29 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
       setMinPrice(min.toFixed(2));
       setAvgPrice(avg.toFixed(2));
     }
-  }, [filteredData, todayData, timeRange]);
+  }, [filteredData]);
 
   // Y축 범위를 동적으로 설정하는 함수
   const getYAxisDomain = () => {
-    if (timeRange === "1D") {
-      const exchangeRates = todayData.map((data) => data.exchange_rate);
-      const minValue = Math.min(...exchangeRates);
-      const maxValue = Math.max(...exchangeRates);
-      return [Math.floor(minValue - 5), Math.ceil(maxValue + 5)];
-    } else {
-      const prices = filteredData.flatMap((data) => data.price.map(Number));
-      let minValue = Math.min(...prices);
-      let maxValue = Math.max(...prices);
-      return [Math.floor(minValue - 5), Math.ceil(maxValue + 5)];
+    const prices = filteredData.flatMap((data) => data.price.map(Number));
+    let minValue = Math.min(...prices);
+    let maxValue = Math.max(...prices);
+
+    // changeState가 "JPY"일 경우 추가적인 범위 조정
+    if (changeState === "JPY") {
+      minValue = Math.max(minValue, 990); // 최소값을 990 이상으로 고정
     }
+
+    return [Math.floor(minValue - 5), Math.ceil(maxValue + 5)];
   };
 
-  // 최신 데이터에 dot을 표시하는 함수
-  const renderDot = (data) => {
-    const latestData = data[data.length - 1]; // 최신 데이터 가져오기
-    return (
-      <Dot
-        cx={latestData.cx}
-        cy={latestData.cy}
-        r={6}
-        fill="#b6e9e5" // dot 색상 설정
-      />
-    );
-  };
   return (
     <div>
       <div>
         <AreaChart
           width={800}
           height={300}
-          data={timeRange === "1D" ? todayData : filteredData} // 모든 timeRange에 대해 동일하게 표시
+          data={filteredData} // 모든 timeRange에 대해 동일하게 표시
           margin={{
             top: 20,
             right: 20,
@@ -116,7 +93,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
           }}
         >
           <XAxis
-            dataKey={timeRange === "1D" ? "time" : "day"} // timeRange에 따라 key 사용
+            dataKey="day" // 모든 범위에서 동일한 데이터 키 사용
             interval={Math.ceil(filteredData.length / 5)}
           />
           <YAxis domain={getYAxisDomain()} />
@@ -129,7 +106,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
               label={
                 <Label
                   value={`최고 ${maxPrice}원`}
-                  position="center"
+                  position="top"
                   fill="red"
                   fontSize={14}
                 />
@@ -144,7 +121,7 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
               label={
                 <Label
                   value={`최저 ${minPrice}원`}
-                  position="center"
+                  position="bottom"
                   fill="blue"
                   fontSize={14}
                 />
@@ -170,14 +147,16 @@ const MainChart = ({ id, changeState, consumData, todayData }) => {
           )}
 
           {/* 필터된 데이터에 따라 영역 차트 표시 */}
+          {timeRange !== "1D" && (
+            <CartesianGrid stroke="#ccc" horizontal={true} vertical={false} />
+          )}
+          {console.log(filteredData)}
           {timeRange === "1D" ? (
             <Area
               type="monotone"
               dataKey="exchange_rate"
-              stroke="#32B3B7"
-              fill="none"
-              dot={renderDot(todayData)}
-              strokeWidth={3}
+              stroke="#b6e9e5"
+              fill="#b6e9e5"
             />
           ) : (
             <>
