@@ -5,6 +5,7 @@ import {
   ModalOverlay,
   useDisclosure,
   Image,
+  Divider,
 } from "@chakra-ui/react";
 
 import MainRecommandButton from "../components/MainRecommandButton";
@@ -27,9 +28,8 @@ import PointBox from "../components/PointBox";
 import { investPointMapper } from "../data/investPointMapper";
 import ReportViewer from "../components/ReportViewer";
 import LevelPopover from "../components/LevelPopover";
-import FinanceReportTable from "../components/FinanceReportTable";
-import FinanceReportSummary from "../components/FinanceReportSummary";
-import GdpCard from '../components/GdpCard';
+import FinanceReportTable from '../components/FinanceReportTable';
+import FinanceReportSummary from '../components/FinanceReportSummary';
 
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
@@ -521,17 +521,14 @@ const MainPageDetail = () => {
           <MainRecommandButton
             text={"투자포인트"}
             scrollToSection={() => scrollToSection("1-1")}
-            src="/image/chart_image.png"
           />
           <MainRecommandButton
             text={"외환리포트"}
             scrollToSection={() => scrollToSection("1-2")}
-            src="/image/folder.png"
           />
           <MainRecommandButton
             text={"금융시장전망"}
             scrollToSection={() => scrollToSection("1-3")}
-            src="/image/notebook.png"
           />
         </div>
         {/* 오른쪽 섹션 */}
@@ -571,8 +568,7 @@ const MainPageDetail = () => {
             <div className="border border-slate-300 mx-4 mt-4"></div>
             <ReportViewer />
           </div>
-          <div
-            name="1-3"
+          <div name="1-3" 
             className="rounded-xl h-[650px] mt-2 py-5 px-2"
             style={{ boxShadow: "0 3px 13px rgba(0, 0, 0, 0.1)" }}
           >
@@ -580,22 +576,13 @@ const MainPageDetail = () => {
               금융시장전망
             </Text>
             <div className="border border-slate-300 mx-4 mt-4"></div>
-            <div className="mt-2">
-              <Text className="mx-4 text-sm">
-                24년 들어, 인플레이션 지속적으로 둔회되는 가운데 고금리 장기화
-                여파 속 4분기 시점 美 냉각 가시화 될 것으로 예상
-              </Text>
-              <Text className="mx-4 text-sm">
-                국내외 물가지표 및 글로벌 경제의 점진적 둔화에 따른 달러 약세
-                영향 속 금리와 환율은 점차 하락하는 모습을 보일 것으로 전망
-              </Text>
+            <div className='mt-2'>
+              <Text className='mx-4 text-sm'>24년 들어, 인플레이션 지속적으로 둔회되는 가운데 고금리 장기화 여파 속 4분기 시점 美 냉각 가시화 될 것으로 예상</Text>
+              <Text className='mx-4 text-sm'>국내외 물가지표 및 글로벌 경제의 점진적 둔화에 따른 달러 약세 영향 속 금리와 환율은 점차 하락하는 모습을 보일 것으로 전망</Text>
             </div>
-
+            
             <FinanceReportTable />
-            <div className='flex'>
-              <FinanceReportSummary />
-              <GdpCard />
-            </div>
+            <FinanceReportSummary />
           </div>
         </div>
       </div>

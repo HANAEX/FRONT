@@ -526,7 +526,7 @@ const MainPageDetail = () => {
           <MainRecommandButton
             text={"외환리포트"}
             scrollToSection={() => scrollToSection("1-2")}
-            src="/image/folder.png"
+            src="/image/finance_report.png"
           />
           <MainRecommandButton
             text={"금융시장전망"}

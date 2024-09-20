@@ -3,7 +3,7 @@ import FinanceCard from './FinanceCard';
 
 const FinanceReportSummary = () => {
   return (
-    <div className='flex justify-start mt-6'>
+    <div className='flex justify-start mt-3'>
       {/* 달러/원 환율 카드 */}
       <FinanceCard
         title="달러/원 환율"

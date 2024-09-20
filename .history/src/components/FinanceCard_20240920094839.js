@@ -3,9 +3,9 @@ import React from 'react'
 const FinanceCard = ({ title, year2023, value2023, year2024, value2024, unit }) => {
   return (
     <div
-      className='rounded-lg w-[180px] px-5 pt-3 pb-5 text-center mx-2'
+      className='rounded-lg w-[200px] p-7 text-center mx-2'
       style={{
-        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
+        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
       }}
     >
       <div style={{ backgroundColor: "#319795", padding: "8px", borderRadius: "8px", marginBottom: "16px" }}>

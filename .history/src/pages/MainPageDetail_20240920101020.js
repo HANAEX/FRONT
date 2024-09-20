@@ -5,6 +5,7 @@ import {
   ModalOverlay,
   useDisclosure,
   Image,
+  Divider,
 } from "@chakra-ui/react";
 
 import MainRecommandButton from "../components/MainRecommandButton";
@@ -521,17 +522,14 @@ const MainPageDetail = () => {
           <MainRecommandButton
             text={"투자포인트"}
             scrollToSection={() => scrollToSection("1-1")}
-            src="/image/chart_image.png"
           />
           <MainRecommandButton
             text={"외환리포트"}
             scrollToSection={() => scrollToSection("1-2")}
-            src="/image/folder.png"
           />
           <MainRecommandButton
             text={"금융시장전망"}
             scrollToSection={() => scrollToSection("1-3")}
-            src="/image/notebook.png"
           />
         </div>
         {/* 오른쪽 섹션 */}

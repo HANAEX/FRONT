@@ -91,57 +91,16 @@ export const imageMapper = [
     name: "INR",
     image: "/image/india_flag.png",
   }
+
+
 ];
 
 export const countryMapperFunction = (state) => {
-  switch(state) {
-    case "USD":
-      return imageMapper[0];
-    case "JPY":
-      return imageMapper[1];
-    case "EUR":
-      return imageMapper[2];
-    case "THB":
-      return imageMapper[3];
-    case "HKD":
-      return imageMapper[4];
-    case "SGD":
-      return imageMapper[5];
-    case "IDR":
-      return imageMapper[6];
-    case "CNY":
-      return imageMapper[7];
-    case "CAD":
-      return imageMapper[8];
-    case "PHP":
-      return imageMapper[9];
-    case "TWD":
-      return imageMapper[10];
-    case "AUD":
-      return imageMapper[11];
-    case "VND":
-      return imageMapper[12];
-    case "GBP":
-      return imageMapper[13];
-    case "MYR":
-      return imageMapper[14];
-    case "RUB":
-      return imageMapper[15];
-    case "MXN":
-      return imageMapper[16];
-    case "MNT":
-      return imageMapper[17];
-    case "BRL":
-      return imageMapper[18];
-    case "AEI":
-      return imageMapper[19];
-    case "MOP":
-      return imageMapper[20];
-    case "NOK":
-      return imageMapper[21];
-    case "INR":
-      return imageMapper[22];
-    default:
-      return null; // 기본적으로 없을 경우 null 반환
+  if(state === "USD") {
+    return imageMapper[0];
+  } else if (state === "JPY") {
+    return imageMapper[1];
+  } else if (state === "EU") {
+    return imageMapper[2];
   }
-};
+}
