@@ -106,10 +106,6 @@ export const imageMapper = [
   {
     name : "BDT",
     image: "/image/BDT_flag.png",
-  },
-  {
-    name : "DKK",
-    image : "/image/DKK_flag.png",
   }
 ];
 
@@ -169,8 +165,6 @@ export const countryMapperFunction = (state) => {
       return imageMapper[25];
     case "BDT":
       return imageMapper[26];
-    case "DKK":
-      return imageMapper[27];
     default:
       return null; // 기본적으로 없을 경우 null 반환
   }

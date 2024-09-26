@@ -33,8 +33,8 @@ const BuySell = ({
         </div>
         <span className="text-2xl font-semibold">
           
-          {/* {currentInvestPrice}원 */}
-          <CountUp
+          {currentInvestPrice}원
+          {/* <CountUp
             start={currentInvestPrice * 0.8}
             // start={value - 300}
             end={currentInvestPrice}
@@ -44,7 +44,7 @@ const BuySell = ({
             decimal="."
             prefix=""
             suffix="원"
-          />
+          /> */}
         </span>
         <div className="flex items-center">
           <Text className=" text-slate-500 font-semibold">
@@ -71,8 +71,8 @@ const BuySell = ({
           <span className="font-semibold text-lg text-blue-500">팔때</span>
         </div>
         <span className="text-2xl font-semibold">
-          {/* {currentSellPrice}원 */}
-          <CountUp
+          {currentSellPrice}원
+          {/* <CountUp
             start={currentSellPrice * 0.8}
             // start={value - 300}
             end={currentSellPrice}
@@ -82,7 +82,7 @@ const BuySell = ({
             decimal="."
             prefix=""
             suffix="원"
-          />
+          /> */}
         </span>
         <div className="flex items-center">
           <Text className=" text-slate-500 font-semibold">

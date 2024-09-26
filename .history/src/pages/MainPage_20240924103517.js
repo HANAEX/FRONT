@@ -322,11 +322,11 @@ const MainPage = () => {
               <button onClick={() => setShowAll(!showAll)}>
                 {showAll ? (
                   <div className="flex items-center">
-                    접기 <TiArrowSortedUp />
+                    접기 <TiArrowSortedDown />
                   </div>
                 ) : (
                   <div className="flex items-center">
-                    자세히 보기 <TiArrowSortedDown />
+                    자세히 보기 <TiArrowSortedUp />
                   </div>
                 )}
               </button>

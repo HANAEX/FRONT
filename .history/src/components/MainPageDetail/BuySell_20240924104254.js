@@ -33,7 +33,7 @@ const BuySell = ({
         </div>
         <span className="text-2xl font-semibold">
           
-          {/* {currentInvestPrice}원 */}
+          {currentInvestPrice}원
           <CountUp
             start={currentInvestPrice * 0.8}
             // start={value - 300}
@@ -71,7 +71,7 @@ const BuySell = ({
           <span className="font-semibold text-lg text-blue-500">팔때</span>
         </div>
         <span className="text-2xl font-semibold">
-          {/* {currentSellPrice}원 */}
+          {currentSellPrice}원
           <CountUp
             start={currentSellPrice * 0.8}
             // start={value - 300}

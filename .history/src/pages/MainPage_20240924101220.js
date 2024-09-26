@@ -152,7 +152,6 @@ import FlowText from "../components/FlowText";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import WorldExInfo from "../components/WorldExInfo";
-import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 const MainPage = () => {
   const [consumData, setConsumData] = useState([]);
@@ -296,6 +295,24 @@ const MainPage = () => {
           </div>
           <div className="border my-2"></div>
 
+          {/* {worldConsumData
+            .filter(data => data.referenceDate === "2024-09-11") // 오늘 날짜 데이터만 표시
+            .map((data, index) => {
+              const updownRate = calculateUpdownRate(data.currency); // 변동률 계산
+              const isSelected = selectedCurrencies.includes(extractCurrencyCode(data.currency));
+              return (
+                <div key={index} onClick={() => handleWorldExInfoClick(data.currency)}>
+                  <WorldExInfo 
+                    currency={data.currency}
+                    baseRate={data.baseRate}
+                    remitSend={data.remitSend}
+                    remitReceive={data.remitReceive}
+                    updownRate={updownRate}
+                    isSelected={isSelected}  // 선택 여부 전달
+                  />
+                </div>
+              );
+            })} */}
           {displayedData.map((data, index) => {
             const updownRate = calculateUpdownRate(data.currency); // 변동률 계산
             const isSelected = selectedCurrencies.includes(
@@ -317,21 +334,12 @@ const MainPage = () => {
               </div>
             );
           })}
-          <div className='flex justify-center'>
-            {filteredData.length > 10 && (
-              <button onClick={() => setShowAll(!showAll)}>
-                {showAll ? (
-                  <div className="flex items-center">
-                    접기 <TiArrowSortedUp />
-                  </div>
-                ) : (
-                  <div className="flex items-center">
-                    자세히 보기 <TiArrowSortedDown />
-                  </div>
-                )}
-              </button>
-            )}
-          </div>
+
+          {filteredData.length > 10 && (
+            <button onClick={() => setShowAll(!showAll)}>
+              {showAll ? "접기" : "자세히 보기"}
+            </button>
+          )}
         </div>
       </div>
     </>

@@ -16,10 +16,10 @@ const NavBar = () => {
       >
         <div name="logobox" className="flex items-center">
           <Box className="w-[24px] h-[24px]">
-            <Image src="/image/hana_logo.png" alt="hana_logo" />
+            <Image src="/image/hana_logo.png" alt="flag" />
           </Box>
           {/* <Text name="title">HanaEx</Text> */}
-          <Image src="/image/hanaex_logo3.png" className='h-[18px]' alt="hanaex_logo" />
+          <Image src="/image/hanaex_logo.png" className='h-[18px]' alt="flag" />
         </div>
         <div name="menus" className="h-full flex items-center gap-3">
           <Link to={"/"}>

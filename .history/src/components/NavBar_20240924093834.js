@@ -19,7 +19,7 @@ const NavBar = () => {
             <Image src="/image/hana_logo.png" alt="hana_logo" />
           </Box>
           {/* <Text name="title">HanaEx</Text> */}
-          <Image src="/image/hanaex_logo3.png" className='h-[18px]' alt="hanaex_logo" />
+          <Image src="/image/hanaex_logo2.png" className='h-[18px]' alt="hanaex_logo" />
         </div>
         <div name="menus" className="h-full flex items-center gap-3">
           <Link to={"/"}>
