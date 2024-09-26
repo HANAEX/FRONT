@@ -175,7 +175,7 @@ const MainPageDetail = () => {
     setModalType("AIModal"); // AIModal로 modalType 변경
     onOpen(); // 모달 열기
 
-    setIsPriceLoading(false);
+    setIsPriceLoading(true);
 
     try {
       // 데이터 가져오기
@@ -184,7 +184,7 @@ const MainPageDetail = () => {
     } catch (error) {
       console.error("데이터 가져오기 오류:", error);
     } finally {
-      setIsPriceLoading(true);
+      setIsPriceLoading(false);
     }
   };
 
@@ -787,7 +787,7 @@ const MainPageDetail = () => {
         {modalType === "AIModal" && (
           <AiModal
             onClose={handleClose}
-            aiData={aiData} // AIModal에 데이터 전달
+            data={aiData} // AIModal에 데이터 전달
           />
         )}
       </Modal>

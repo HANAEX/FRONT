@@ -170,12 +170,11 @@ const MainPageDetail = () => {
     console.log("value updated:", value); // value 업데이트 시 로그 출력
   }, [value]);
 
-  // ai 컴포넌트 열기
   const handleAIModalOpen = async () => {
     setModalType("AIModal"); // AIModal로 modalType 변경
     onOpen(); // 모달 열기
 
-    setIsPriceLoading(false);
+    setIsLoading(true);
 
     try {
       // 데이터 가져오기
@@ -184,7 +183,7 @@ const MainPageDetail = () => {
     } catch (error) {
       console.error("데이터 가져오기 오류:", error);
     } finally {
-      setIsPriceLoading(true);
+      setIsLoading(false);
     }
   };
 
@@ -437,6 +436,7 @@ const MainPageDetail = () => {
 
   console.log(showClander);
   if (!isPriceLoading) return <div>로딩중입니다.</div>;
+  if (!isLoading) return <div>로딩중입니다.</div>;
   console.log("mainpage : ", user);
   return (
     <div className="w-[960px] flex flex-col py-1 px-10">
@@ -787,7 +787,7 @@ const MainPageDetail = () => {
         {modalType === "AIModal" && (
           <AiModal
             onClose={handleClose}
-            aiData={aiData} // AIModal에 데이터 전달
+            data={aiData} // AIModal에 데이터 전달
           />
         )}
       </Modal>

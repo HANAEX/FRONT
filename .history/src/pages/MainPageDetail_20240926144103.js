@@ -787,7 +787,7 @@ const MainPageDetail = () => {
         {modalType === "AIModal" && (
           <AiModal
             onClose={handleClose}
-            aiData={aiData} // AIModal에 데이터 전달
+            data={aiData} // AIModal에 데이터 전달
           />
         )}
       </Modal>

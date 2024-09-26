@@ -35,7 +35,6 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { TbReport } from "react-icons/tb";
 // import { LiaSearchDollarSolid } from "react-icons/lia";
 import { CgSearchFound } from "react-icons/cg";
-import AiModal from "../modal/AIModal";
 const MainPageDetail = () => {
   const user = useSelector((state) => state.user.user);
   // 현재 가격 상태
@@ -48,8 +47,6 @@ const MainPageDetail = () => {
   const handleSelect = (sectionName) => {
     setSelectedSection(sectionName); // 선택된 섹션 업데이트
   };
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태
-  const [aiData, setAiData] = useState(null); // AI 데이터를 저장할 상태
 
   // 원본가격
   const [originInvestPrice, setOriginInvestPrice] = useState(0);
@@ -169,24 +166,6 @@ const MainPageDetail = () => {
   useEffect(() => {
     console.log("value updated:", value); // value 업데이트 시 로그 출력
   }, [value]);
-
-  // ai 컴포넌트 열기
-  const handleAIModalOpen = async () => {
-    setModalType("AIModal"); // AIModal로 modalType 변경
-    onOpen(); // 모달 열기
-
-    setIsPriceLoading(false);
-
-    try {
-      // 데이터 가져오기
-      const response = await axios.get("http://localhost:8081/api/predict");
-      setAiData(response.data[0]); // 데이터 설정
-    } catch (error) {
-      console.error("데이터 가져오기 오류:", error);
-    } finally {
-      setIsPriceLoading(true);
-    }
-  };
 
   // 날짜 초기화 함수
   const handleSetValue = () => {
@@ -429,14 +408,9 @@ const MainPageDetail = () => {
     setModalType("FxModal");
   };
 
-  // AIModal에서 닫기 버튼 클릭 시 FxModal로 변경
-  const handleClose = () => {
-    setModalType("FxModal");
-    onClose(); // 모달 닫기
-  };
-
   console.log(showClander);
   if (!isPriceLoading) return <div>로딩중입니다.</div>;
+
   console.log("mainpage : ", user);
   return (
     <div className="w-[960px] flex flex-col py-1 px-10">
@@ -479,7 +453,7 @@ const MainPageDetail = () => {
           </div>
           <div className="flex items-center gap-1">
             <Text className="text-slate-500">
-              {todayData[todayData.length - 1]?.time || "정보 없음"}
+            {todayData[todayData.length - 1]?.time || "정보 없음"}
             </Text>
             <IoReload className="text-slate-500" />
           </div>
@@ -525,17 +499,18 @@ const MainPageDetail = () => {
           살래요
         </button>
         <SelectButton onOpen={onOpen} handleSelectClick={handleSelectClick} />
-        {/* ai 버튼 */}
         <button
-          onClick={handleAIModalOpen}
-          className="text-white bt-background px-3 rounded-full hover:border hover:border-[#009577] transition-all"
-          style={{ height: "42px", width: "42px" }}
+          onClick={onOpen}
+          className="text-white bt-background px-4 rounded-full hover:border hover:border-[#009577] transition-all"
+          style={{ height: "42px", width: "50px" }}
         >
           <Image
-            src="/image/ai_icon2.png"
-            boxSize="20px"
-            objectFit="cover"
-          ></Image>
+            src='/image/ai_icon2.png'
+            boxSize='24px'
+            objectFit='cover'
+          >
+
+          </Image>
         </button>
       </div>
 
@@ -782,12 +757,6 @@ const MainPageDetail = () => {
             onClose={onClose}
             handleTransactionUpdate={handleTransactionUpdate}
             handleBackToFxModal={handleBackToFxModal}
-          />
-        )}
-        {modalType === "AIModal" && (
-          <AiModal
-            onClose={handleClose}
-            aiData={aiData} // AIModal에 데이터 전달
           />
         )}
       </Modal>
