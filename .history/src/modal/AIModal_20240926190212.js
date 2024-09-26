@@ -54,7 +54,7 @@ const AiModal = ({ onClose, aiData }) => {
   ];
   return (
     <ModalContent width="80%" maxW="600px" maxH="520px">
-      <ModalHeader className='text-center'>하나 AI 리포트</ModalHeader>
+      <ModalHeader>하나 AI 리포트</ModalHeader>
       <ModalCloseButton onClick={onClose}/>
       <ModalBody className='overflow-y-auto'>
         <Tabs variant="soft-rounded" colorScheme="green">

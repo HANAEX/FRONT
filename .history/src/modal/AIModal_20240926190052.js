@@ -11,7 +11,6 @@ import {
   TabPanel,
   Text,
   Image,
-  ModalCloseButton
 } from "@chakra-ui/react";
 import {
   Bar,
@@ -54,8 +53,7 @@ const AiModal = ({ onClose, aiData }) => {
   ];
   return (
     <ModalContent width="80%" maxW="600px" maxH="520px">
-      <ModalHeader className='text-center'>하나 AI 리포트</ModalHeader>
-      <ModalCloseButton onClick={onClose}/>
+      <ModalHeader>하나 AI 리포트</ModalHeader>
       <ModalBody className='overflow-y-auto'>
         <Tabs variant="soft-rounded" colorScheme="green">
           <TabList>

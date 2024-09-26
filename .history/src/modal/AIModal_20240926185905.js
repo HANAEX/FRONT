@@ -11,7 +11,6 @@ import {
   TabPanel,
   Text,
   Image,
-  ModalCloseButton
 } from "@chakra-ui/react";
 import {
   Bar,
@@ -54,9 +53,8 @@ const AiModal = ({ onClose, aiData }) => {
   ];
   return (
     <ModalContent width="80%" maxW="600px" maxH="520px">
-      <ModalHeader className='text-center'>하나 AI 리포트</ModalHeader>
-      <ModalCloseButton onClick={onClose}/>
-      <ModalBody className='overflow-y-auto'>
+      <ModalHeader>하나 AI 리포트</ModalHeader>
+      <ModalBody className='overflow-hidden'>
         <Tabs variant="soft-rounded" colorScheme="green">
           <TabList>
             <Tab>내일</Tab>
@@ -176,7 +174,7 @@ const AiModal = ({ onClose, aiData }) => {
               </Text>
             </TabPanel>
             {/* 주간 */}
-            <TabPanel className="mt-5">
+            <TabPanel>
               <Text className="text-lg" style={{ lineHeight: "10px" }}>
                 하나AI는 일주일 후
               </Text>
@@ -263,7 +261,7 @@ const AiModal = ({ onClose, aiData }) => {
               </Text>
             </TabPanel>
             {/* 월간 */}
-            <TabPanel className="mt-5">
+            <TabPanel>
               <Text className="text-lg" style={{ lineHeight: "10px" }}>
                 하나AI는 한달 후
               </Text>

@@ -11,7 +11,6 @@ import {
   TabPanel,
   Text,
   Image,
-  ModalCloseButton
 } from "@chakra-ui/react";
 import {
   Bar,
@@ -42,9 +41,8 @@ const AiModal = ({ onClose, aiData }) => {
       value: parseFloat(value.replace(/,/g, "")), // 쉼표 제거 후 숫자로 변환
     })
   );
-  
+
   console.log(weekPredictData)
-  console.log("month : ", monthPredictData)
   // BarChart에 사용할 데이터 준비
   const data = [
     {
@@ -53,10 +51,9 @@ const AiModal = ({ onClose, aiData }) => {
     },
   ];
   return (
-    <ModalContent width="80%" maxW="600px" maxH="520px">
-      <ModalHeader className='text-center'>하나 AI 리포트</ModalHeader>
-      <ModalCloseButton onClick={onClose}/>
-      <ModalBody className='overflow-y-auto'>
+    <ModalContent width="80%" maxW="600px" maxH="900px">
+      <ModalHeader>하나 AI 리포트</ModalHeader>
+      <ModalBody>
         <Tabs variant="soft-rounded" colorScheme="green">
           <TabList>
             <Tab>내일</Tab>
@@ -176,7 +173,7 @@ const AiModal = ({ onClose, aiData }) => {
               </Text>
             </TabPanel>
             {/* 주간 */}
-            <TabPanel className="mt-5">
+            <TabPanel>
               <Text className="text-lg" style={{ lineHeight: "10px" }}>
                 하나AI는 일주일 후
               </Text>
@@ -263,7 +260,7 @@ const AiModal = ({ onClose, aiData }) => {
               </Text>
             </TabPanel>
             {/* 월간 */}
-            <TabPanel className="mt-5">
+            <TabPanel>
               <Text className="text-lg" style={{ lineHeight: "10px" }}>
                 하나AI는 한달 후
               </Text>
@@ -281,7 +278,7 @@ const AiModal = ({ onClose, aiData }) => {
               <div className="flex gap-1">
                 <Text className="text-2xl font-bold">USD</Text>
                 <Text className="text-2xl font-bold">
-                  {monthPredictData[28].value}.0원
+                  {monthPredictData[29].value}.0원
                 </Text>
               </div>
               <div className="flex">
@@ -334,7 +331,7 @@ const AiModal = ({ onClose, aiData }) => {
                   하나 AI가 이렇게 분석한 이유를 설명해줄게요.
                 </Text>
                 <Text className="text-sm text-slate-600 px-3">
-                  {aiData.finalAnalysis}
+                  {aiData.weekReason}
                 </Text>
               </div>
               <div className="border border-gray-200 my-3"></div>
